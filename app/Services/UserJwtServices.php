@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Cache;
 class UserJwtServices
 {
     const ALGO = 'HS256';
-    const EXPIRED = '120'; // minutes
+
+    const EXPIRED = 120; // minutes
+
     const KEYPREFIX = 'SmileSquad ';
 
     // generate token in login
@@ -19,14 +21,15 @@ class UserJwtServices
     {
         session()->put('user_login_at', $created_at = now());
 
-        $key = auth()->id() . $created_at;
+        $key = auth()->id().$created_at;
 
-        $value = JWT::encode([
-                'user_id' => auth()->id(), 
+        $value = JWT::encode(
+            [
+                'user_id' => auth()->id(),
                 'created_at' => $created_at,
-                'exp' => now()->addMinutes(self::EXPIRED)->timestamp
-            ], 
-            config('app.key', 'aji.kamaludin'), 
+                'exp' => now()->addMinutes(self::EXPIRED)->timestamp,
+            ],
+            config('app.key', 'aji.kamaludin'),
             self::ALGO
         );
 
@@ -51,11 +54,11 @@ class UserJwtServices
     }
 
     // only call from inertia middleware that accessable to session
-    public static function getActiveToken() 
+    public static function getActiveToken()
     {
         $user_id = auth()->id();
         $login_at = session()->get('user_login_at');
 
-        return Cache::get($user_id . $login_at, '');
+        return Cache::get($user_id.$login_at, '');
     }
 }

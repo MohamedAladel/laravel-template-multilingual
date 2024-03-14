@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SelectTableController extends Controller
+class _SelectTableController extends Controller
 {
     public function __invoke(Request $request, string $table)
     {
@@ -18,7 +18,7 @@ class SelectTableController extends Controller
             'q' => 'nullable|string',
             'orderby' => 'nullable|string',
         ]);
-        
+
         $query = DB::table($table);
 
         $select_fields = ['id'];
@@ -39,7 +39,7 @@ class SelectTableController extends Controller
         }
 
         if ($request->exists('q')) {
-            foreach($search_field as $sq) {
+            foreach ($search_field as $sq) {
                 $query->orWhere($sq, 'like', '%'.$request->q.'%');
             }
         }
@@ -48,7 +48,7 @@ class SelectTableController extends Controller
             $orderby = explode('.', $request->orderby);
             $query->orderBy($orderby[0], $orderby[1] ?? 'desc');
         } else {
-            $query->orderBy('updated_at',  'desc');
+            $query->orderBy('updated_at', 'desc');
         }
 
         return $query->get();

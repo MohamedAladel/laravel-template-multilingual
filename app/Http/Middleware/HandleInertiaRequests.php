@@ -19,7 +19,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      */
-    public function version(Request $request): string|null
+    public function version(Request $request): ?string
     {
         return parent::version($request);
     }
@@ -36,7 +36,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user() ? $request->user()->load(['role.permissions']) : $request->user(),
                 'login_at' => session()->get('user_login_at', ''),
                 'jwt_token' => UserJwtServices::getActiveToken(),
-                'jwt_prefix' => UserJwtServices::KEYPREFIX
+                'jwt_prefix' => UserJwtServices::KEYPREFIX,
             ],
             'flash' => [
                 'message' => fn () => $request->session()->get('message'),

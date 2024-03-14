@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use App\Models\Traits\UserTrackable;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Dyrynda\Database\Support\CascadeSoftDeletes;
 
 class Model extends BaseModel
 {
-    use HasFactory, HasUlids, UserTrackable, SoftDeletes, CascadeSoftDeletes;
+    use CascadeSoftDeletes, HasFactory, HasUlids, SoftDeletes, UserTrackable;
 
     public $cascadeDeletes = [];
 }

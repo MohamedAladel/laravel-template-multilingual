@@ -17,6 +17,7 @@ class JwtCustomApiVerification
     public function handle(Request $request, Closure $next): Response
     {
         UserJwtServices::validateToken($request->header('Authorization'));
+
         return $next($request);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\SelectTableController;
-use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\_SelectTableController;
 use App\Http\Middleware\JwtCustomApiVerification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware(JwtCustomApiVerification::class)->group(function () {
-    Route::get('/select/{table}', SelectTableController::class)->name('api.select.table');
-});
 
+Route::middleware(JwtCustomApiVerification::class)->group(function () {
+    Route::get('/_select/{table}', _SelectTableController::class)->name('api.select.table');
+});
