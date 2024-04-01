@@ -11,4 +11,5 @@
 -   [x] select api component (central table select api), props : what to show in select, item selected is id or full item
 -   [ ] general table component, a component has filter and search
 -   [ ] change react-toastify to [sonner](https://github.com/emilkowalski/sonner)
+-   [ ] replace any component contains react-datepicker with react-tailwindcss-datepicker
 -   [ ] create unit test to login, logout, manage role, manage user, test api select general table

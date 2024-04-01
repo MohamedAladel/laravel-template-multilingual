@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   app:
       image: ajikamaludin/php83user:latest

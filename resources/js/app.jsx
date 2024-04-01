@@ -1,6 +1,5 @@
 import './bootstrap'
 import '../css/app.css'
-import 'flowbite'
 import 'preline'
 import 'react-toastify/dist/ReactToastify.css'
 
