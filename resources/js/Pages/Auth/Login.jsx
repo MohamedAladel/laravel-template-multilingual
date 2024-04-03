@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import GuestLayout from '@/Layouts/GuestLayout'
 import { Head, useForm } from '@inertiajs/react'
-import TextInput from '@/Components/Preline/TextInput'
-import Checkbox from '@/Components/Preline/Checkbox'
-import Button from '@/Components/Preline/Button'
+import TextInput from '@/Components/DaisyUI/TextInput'
+import Checkbox from '@/Components/DaisyUI/Checkbox'
+import Button from '@/Components/DaisyUI/Button'
 
 export default function Login({ status }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -51,7 +51,7 @@ export default function Login({ status }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <TextInput 
+                    <TextInput
                         type="text"
                         label="Email"
                         name="email"
@@ -66,7 +66,7 @@ export default function Login({ status }) {
                 </div>
 
                 <div className="mt-4">
-                    <TextInput 
+                    <TextInput
                         type="password"
                         label="Password"
                         name="password"
@@ -79,7 +79,7 @@ export default function Login({ status }) {
                     />
                 </div>
 
-                <div className="block mt-4">
+                <div className="mt-4">
                     <Checkbox
                         label="Remember me"
                         name="remember"
@@ -90,7 +90,13 @@ export default function Login({ status }) {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <Button onClick={submit} processing={processing}>Log in</Button>
+                    <Button
+                        onClick={submit}
+                        processing={processing}
+                        type={'primary'}
+                    >
+                        Log in
+                    </Button>
                 </div>
             </form>
         </GuestLayout>

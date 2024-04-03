@@ -23,16 +23,16 @@ class AppServiceProvider extends ServiceProvider
     {
         // for optimize in development log every query
         // if (app()->isProduction() == false) {
-        //     DB::listen(function ($query) {
-        //         Log::info(
-        //             $query->sql,
-        //             [
-        //                 'bindings' => $query->bindings,
-        //                 'time' => $query->time,
-        //                 'connectionName' => $query->connectionName,
-        //             ]
-        //         );
-        //     });
+        // DB::listen(function ($query) {
+        //     Log::info(
+        //         $query->sql,
+        //         [
+        //             'bindings' => $query->bindings,
+        //             'time' => $query->time,
+        //             'connectionName' => $query->connectionName,
+        //         ]
+        //     );
+        // });
         // }
     }
 }

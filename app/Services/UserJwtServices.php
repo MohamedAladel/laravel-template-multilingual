@@ -12,7 +12,7 @@ class UserJwtServices
 {
     const ALGO = 'HS256';
 
-    const EXPIRED = 1; // minutes
+    const EXPIRED = 120; // minutes
 
     const KEYPREFIX = 'ABCSquad_';
 

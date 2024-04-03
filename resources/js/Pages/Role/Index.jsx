@@ -7,13 +7,12 @@ import { useModalState } from '@/hooks'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import Pagination from '@/Components/Pagination'
-import ModalConfirm from '@/Components/Preline/ModalConfirm'
-import SearchInput from '@/Components/Preline/SearchInput'
+import ModalConfirm from '@/Components/DaisyUI/ModalConfirm'
+import SearchInput from '@/Components/DaisyUI/SearchInput'
 import HasPermission from '@/Components/Common/HasPermission'
-import Dropdown from '@/Components/Preline/Dropdown'
-import Button from '@/Components/Preline/Button'
-import Card from '@/Components/Preline/Card'
-import Table from '@/Components/Preline/Table'
+import Dropdown from '@/Components/DaisyUI/Dropdown'
+import Button from '@/Components/DaisyUI/Button'
+import Card from '@/Components/DaisyUI/Card'
 
 export default function Index(props) {
     const {
@@ -51,10 +50,7 @@ export default function Index(props) {
     }, [search])
 
     return (
-        <AuthenticatedLayout
-            page={'System'}
-            action={'Role'}
-        >
+        <AuthenticatedLayout page={'System'} action={'Role'}>
             <Head title="Role" />
 
             <div>
@@ -63,7 +59,9 @@ export default function Index(props) {
                         <div className="flex justify-between">
                             <HasPermission p="create-role">
                                 <Link href={route('roles.create')}>
-                                    <Button size="sm">Tambah</Button>
+                                    <Button size="sm" type="primary">
+                                        Tambah
+                                    </Button>
                                 </Link>
                             </HasPermission>
 
@@ -74,64 +72,61 @@ export default function Index(props) {
                                 />
                             </div>
                         </div>
-                        <Table>
-                            <Table.Header>
-                                <Table.HeaderItem
-                                    className="col-span-3"
-                                >
-                                    Name
-                                </Table.HeaderItem>
-                                <Table.HeaderItem
-                                    className="col-span-1"
-                                />
-                            </Table.Header>
-                            {data.map((role, index) => (
-                                <Table.Body key={role.id}>
-                                    <Table.BodyItem className="col-span-3 py-4 px-6 text-start">
-                                        {role.name}
-                                    </Table.BodyItem>
-                                    <Table.BodyItem className="col-span-1 relative py-4 px-6 flex justify-end">
-                                        <Dropdown label={'Opsi'} last={index + 1 === +data.length}>
-                                            <HasPermission p="update-role">
-                                                <Dropdown.Item
-                                                    onClick={() =>
-                                                        router.visit(
-                                                            route(
-                                                                'roles.edit',
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th />
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.map((role, index) => (
+                                    <tr key={role.id}>
+                                        <td>{role.name}</td>
+                                        <td className="text-right">
+                                            <Dropdown
+                                                label={'Opsi'}
+                                                last={
+                                                    index + 1 === +data.length
+                                                }
+                                            >
+                                                <HasPermission p="update-role">
+                                                    <Dropdown.Item
+                                                        onClick={() =>
+                                                            router.visit(
+                                                                route(
+                                                                    'roles.edit',
+                                                                    role
+                                                                )
+                                                            )
+                                                        }
+                                                    >
+                                                        <div className="flex space-x-1 items-center">
+                                                            <HiPencil />
+                                                            <div>Ubah</div>
+                                                        </div>
+                                                    </Dropdown.Item>
+                                                </HasPermission>
+                                                <HasPermission p="delete-role">
+                                                    <Dropdown.Item
+                                                        onClick={() =>
+                                                            handleDeleteClick(
                                                                 role
                                                             )
-                                                        )
-                                                    }
-                                                >
-                                                    <div className="flex space-x-1 items-center">
-                                                        <HiPencil />
-                                                        <div>
-                                                            Ubah
+                                                        }
+                                                    >
+                                                        <div className="flex space-x-1 items-center">
+                                                            <HiTrash />
+                                                            <div>Hapus</div>
                                                         </div>
-                                                    </div>
-                                                </Dropdown.Item>
-                                            </HasPermission>
-                                            <HasPermission p="delete-role">
-                                                <Dropdown.Item
-                                                    onClick={() =>
-                                                        handleDeleteClick(
-                                                            role
-                                                        )
-                                                    }
-                                                >
-                                                    <div className="flex space-x-1 items-center">
-                                                        <HiTrash />
-                                                        <div>
-                                                            Hapus
-                                                        </div>
-                                                    </div>
-                                                </Dropdown.Item>
-                                            </HasPermission>
-                                        </Dropdown>
-                                    </Table.BodyItem>
-                                </Table.Body>
-                            ))}
-                        </Table>
+                                                    </Dropdown.Item>
+                                                </HasPermission>
+                                            </Dropdown>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                         <div className="w-full overflow-x-auto flex lg:justify-center">
                             <Pagination links={links} params={params} />
                         </div>

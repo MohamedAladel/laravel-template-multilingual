@@ -1,6 +1,6 @@
 # Laravel Template - Preline
 
-This just a laravel template with breeze react, user role based access crud with setup <a href="https://preline.co?ref=github.com/ajikamaludin" target="_blank">preline style</a> admin template
+This just a laravel template with breeze react, user role based access crud with setup <a href="https://daisyui.com?ref=github.com/ajikamaludin" target="_blank">daisyui style</a> admin template
 
 ## Support me
 
@@ -59,7 +59,6 @@ npm run build
 
 ## Screen Capture
 
-![](screenshot_v2.gif?raw=true)
+![](screenshot_v3.gif?raw=true)
 
 <hr/>
-

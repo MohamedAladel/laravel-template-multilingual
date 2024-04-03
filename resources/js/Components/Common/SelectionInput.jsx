@@ -6,7 +6,7 @@ import axios from 'axios'
 import qs from 'qs'
 
 import { useDebounce } from '@/hooks'
-import Spinner from '@/Components/Preline/Spinner'
+import Spinner from '@/Components/DaisyUI/Spinner'
 
 export default function SelectionInput(props) {
     const ref = useRef()
@@ -32,7 +32,7 @@ export default function SelectionInput(props) {
             separator: ' - ',
             orderby: '',
             qk: '',
-        }
+        },
     } = props
 
     const [showItems, setShowItem] = useState([])
@@ -95,8 +95,9 @@ export default function SelectionInput(props) {
     const fetch = (q = '') => {
         setLoading(true)
         axios
-            .get(`
-                ${route('api.select.table', data.table)}?${qs.stringify({ 
+            .get(
+                `
+                ${route('api.select.table', data.table)}?${qs.stringify({
                     q,
                     limit,
                     offset,
@@ -104,13 +105,15 @@ export default function SelectionInput(props) {
                     orderby: data.orderby,
                     searchable_field: data.qk,
                 })}
-                ` , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    Authorization: auth.jwt_prefix + auth.jwt_token,
-                },
-            })
+                `,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        Authorization: auth.jwt_prefix + auth.jwt_token,
+                    },
+                }
+            )
             .then((response) => {
                 setShowItem(response.data)
             })
@@ -152,9 +155,15 @@ export default function SelectionInput(props) {
             const item = showItems.find((item) => item.id === itemSelected)
             if (item) {
                 let selected_name = ''
-                {display_name.map((dn, i) => (
-                        selected_name = selected_name + `${i == 0 ? '' : separator}` + item[`${dn}`]
-                ))}
+                {
+                    display_name.map(
+                        (dn, i) =>
+                            (selected_name =
+                                selected_name +
+                                `${i == 0 ? '' : separator}` +
+                                item[`${dn}`])
+                    )
+                }
                 setSelected(selected_name)
                 setIsSelected(true)
             }
@@ -176,24 +185,24 @@ export default function SelectionInput(props) {
                 <div className="w-full">
                     <div className="flex flex-col relative">
                         {label !== '' && (
-                            <label
-                                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                            >
+                            <label className="mb-2 block text-sm font-medium text-base-content">
                                 {label}
                             </label>
                         )}
                         <div className="w-full">
                             <div
-                                className={`
+                                className={`flex items-center input px-0
                                 ${
                                     error
-                                        ? 'flex items-center border rounded-lg border-red-500 dark:bg-gray-800'
-                                        : 'dark:bg-slate-900 flex items-center border rounded-lg border-gray-200 dark:border-gray-700'
-                                }
-                                ${disabled ? 'bg-slate-100' : ''}`}
+                                        ? ' border-red-500'
+                                        : ' border-base-content border-opacity-20'
+                                }`}
+                                style={{ borderWidth: '1px' }}
                             >
                                 <input
-                                    className={`${error ? 'p-3 block w-full dark:bg-gray-800 dark:text-gray-400 text-sm outline-none border-none focus:border-none focus:outline-none focus:shadow-none focus:ring-transparent rounded-lg' : 'p-3 block w-full dark:bg-slate-900 dark:text-gray-400 text-sm outline-none border-none focus:border-none focus:outline-none focus:shadow-none focus:ring-transparent rounded-lg'}`}
+                                    className={`input w-full border-none ${
+                                        disabled ? 'invisible' : ''
+                                    }`}
                                     onMouseDown={onInputMouseDown}
                                     placeholder={_placeholder}
                                     value={`${
@@ -206,7 +215,6 @@ export default function SelectionInput(props) {
                                     onChange={(e) =>
                                         filterItems(e.target.value)
                                     }
-                                    disabled={disabled}
                                 />
                                 {isSelected && (
                                     <div
@@ -230,25 +238,23 @@ export default function SelectionInput(props) {
                                 </div>
                             </div>
                             {error && (
-                                <p className="mb-2 text-sm text-red-600 dark:text-red-500">
+                                <p className="my-2 text-sm text-red-600 dark:text-red-500">
                                     {error}
                                 </p>
                             )}
                         </div>
                         {isOpen && (
                             <div
-                                className="absolute mt-1 shadow-lg bg-gray-50 dark:bg-slate-900 dark:text-gray-400 top-100 z-40 w-full lef-0 rounded overflow-y-auto"
-                                style={{ maxHeight: '300px', top: '100%' }}
+                                className="absolute mt-1 shadow-lg top-100 z-40 w-full lef-0 rounded overflow-y-auto bg-base-300 text-base-content"
+                                style={{ maxHeight: '100px', top: '100%' }}
                             >
                                 <div className="flex flex-col w-full">
                                     {loading ? (
                                         <div>
-                                            <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-neutral-content">
-                                                <div className="w-full items-center justify-center flex">
-                                                    <div className="mx-2 my-5">
-                                                        <Spinner className="mr-2" />
-                                                        <span>Loading...</span>
-                                                    </div>
+                                            <div className="flex w-full items-center p-2 pl-2 border-transparent relative">
+                                                <div className="w-full items-center justify-center flex mx-2 my-5 gap-2">
+                                                    <Spinner />
+                                                    <span>Loading...</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,15 +267,31 @@ export default function SelectionInput(props) {
                                                         handleSelectItem(item)
                                                     }
                                                 >
-                                                    <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-neutral-content hover:bg-gray-400 bg-opacity-10 dark:hover:bg-gray-200 dark:hover:bg-opacity-10 dark:hover:text-gray-100">
+                                                    <div className="flex w-full items-center p-2 pl-2 relative bg-base-100 hover:bg-opacity-10">
                                                         <div className="w-full items-center flex">
                                                             <div className="mx-2">
-                                                                {display_name.map((dn, i) => (
-                                                                    <span key={dn} index={i}>
-                                                                        {i == 0 ? '' : `${separator}`}
-                                                                        {item[`${dn}`]}
-                                                                    </span>
-                                                                ))}
+                                                                {display_name.map(
+                                                                    (dn, i) => (
+                                                                        <span
+                                                                            key={
+                                                                                dn
+                                                                            }
+                                                                            index={
+                                                                                i
+                                                                            }
+                                                                        >
+                                                                            {i ==
+                                                                            0
+                                                                                ? ''
+                                                                                : `${separator}`}
+                                                                            {
+                                                                                item[
+                                                                                    `${dn}`
+                                                                                ]
+                                                                            }
+                                                                        </span>
+                                                                    )
+                                                                )}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -277,14 +299,11 @@ export default function SelectionInput(props) {
                                             ))}
                                             {showItems.length <= 0 && (
                                                 <div>
-                                                    <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-neutral-content">
-                                                        <div className="w-full items-center justify-center flex">
-                                                            <div className="mx-2 my-5">
-                                                                <span>
-                                                                    No Items
-                                                                    Found
-                                                                </span>
-                                                            </div>
+                                                    <div className="flex w-full items-center p-2 relative">
+                                                        <div className="w-full items-center justify-center flex mx-2 my-5">
+                                                            <span>
+                                                                No Items Found
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -6,15 +6,14 @@ import { isArray, isEmpty } from 'lodash'
 
 import Dropdown from '@/Components/Defaults/Dropdown'
 import SidebarNav from './Partials/SidebarNav'
-import DarkSwitch from '@/Components/DarkSwitch'
-import Breadcrumb from '@/Components/Preline/Breadcrumb'
+import Breadcrumb from '@/Components/DaisyUI/Breadcrumb'
+import ThemeSwitch from '@/Components/DaisyUI/ThemeSwitch'
+import { themeChange } from 'theme-change'
 
-export default function Authenticated({
-    children,
-    page = '',
-    action = '',
-}) {
-    const { props: { auth, flash } } = usePage()
+export default function Authenticated({ children, page = '', action = '' }) {
+    const {
+        props: { auth, flash },
+    } = usePage()
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false)
 
@@ -24,14 +23,24 @@ export default function Authenticated({
         }
     }, [flash])
 
+    useEffect(() => {
+        themeChange(false)
+        // 👆 false parameter is required for react project
+    }, [])
+
     return (
-        <div className="min-h-screen dark:bg-slate-900">
-            <SidebarNav user={auth.user} show={showingNavigationDropdown}/>
+        <div className="min-h-screen">
+            <SidebarNav user={auth.user} show={showingNavigationDropdown} />
             <main className="ml-0 transition md:ml-64">
                 <nav className="">
                     <div className="mx-auto px-4 sm:px-6 lg:px-8 py-2">
                         <div className="flex justify-between sm:justify-end">
-                            <div className="-mr-2 flex items-center sm:hidden space-x-2" data-hs-overlay="#docs-sidebar" aria-controls="docs-sidebar" aria-label="Toggle navigation">
+                            <div
+                                className="-mr-2 flex items-center sm:hidden space-x-2"
+                                data-hs-overlay="#docs-sidebar"
+                                aria-controls="docs-sidebar"
+                                aria-label="Toggle navigation"
+                            >
                                 <button
                                     onClick={() =>
                                         setShowingNavigationDropdown(
@@ -45,14 +54,18 @@ export default function Authenticated({
                             </div>
 
                             <div className="flex items-center sm:ml-6">
-                                <div className='ml-3 relative'>
-                                    <DarkSwitch/>
+                                <div className="ml-3 relative">
+                                    <ThemeSwitch />
                                 </div>
                                 <div className="ml-3 relative">
                                     <Dropdown>
                                         <Dropdown.Trigger>
                                             <span className="inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-500 text-sm font-semibold text-white leading-none">
-                                                {auth.user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                                                {auth.user.name
+                                                    .split(' ')
+                                                    .map((n) => n[0])
+                                                    .join('')
+                                                    .toUpperCase()}
                                             </span>
                                         </Dropdown.Trigger>
 
@@ -73,25 +86,26 @@ export default function Authenticated({
                                     </Dropdown>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </nav>
                 {page !== '' && (
                     <Breadcrumb>
-                        <Breadcrumb.Item onClick={() => router.visit(route('dashboard'))}>
+                        <Breadcrumb.Item
+                            onClick={() => router.visit(route('dashboard'))}
+                        >
                             {page}
                         </Breadcrumb.Item>
                         {!isEmpty(action) && (
                             <>
-                                {isArray(action) ? 
+                                {isArray(action) ? (
                                     action.map((a, i) => (
-                                        <Breadcrumb.Item key={i}>{a}</Breadcrumb.Item>
-                                    )
-                                    ) : (
-                                    <Breadcrumb.Item>
-                                        {action}
-                                    </Breadcrumb.Item>
+                                        <Breadcrumb.Item key={i}>
+                                            {a}
+                                        </Breadcrumb.Item>
+                                    ))
+                                ) : (
+                                    <Breadcrumb.Item>{action}</Breadcrumb.Item>
                                 )}
                             </>
                         )}
