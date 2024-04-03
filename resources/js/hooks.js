@@ -1,25 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
 export function useDebounce(value, delay) {
-    const [debouncedValue, setDebouncedValue] = useState(value);
+    const [debouncedValue, setDebouncedValue] = useState(value)
     useEffect(() => {
         const handler = setTimeout(() => {
-            setDebouncedValue(value);
-        }, delay);
+            setDebouncedValue(value)
+        }, delay)
         return () => {
-            clearTimeout(handler);
-        };
-    }, [value, delay]);
-    return debouncedValue;
+            clearTimeout(handler)
+        }
+    }, [value, delay])
+    return debouncedValue
 }
 
 export function useModalState(state = false) {
-    const [isOpen, setIsOpen] = useState(state);
+    const [isOpen, setIsOpen] = useState(state)
     const toggle = () => {
-        setIsOpen(!isOpen);
-    };
+        setIsOpen(!isOpen)
+    }
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState(null)
 
     return {
         isOpen,
@@ -27,7 +27,7 @@ export function useModalState(state = false) {
         setIsOpen,
         data,
         setData,
-    };
+    }
 }
 
 export function usePagination(auth, r) {
@@ -37,18 +37,18 @@ export function usePagination(auth, r) {
         links: [],
         from: 0,
         to: 0,
-        total: 0
+        total: 0,
+        page: 1,
     })
-
-    const page = data.links.find(link => link.active === true)
 
     const fetch = (page = 1, params = {}) => {
         setLoading(true)
         axios
             .get(route(r, { page: page, ...params }), {
                 headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + auth.user.jwt_token,
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    Authorization: auth.jwt_prefix + auth.jwt_token,
                 },
             })
             .then((res) => {
@@ -56,7 +56,7 @@ export function usePagination(auth, r) {
             })
             .catch((err) => console.log(err))
             .finally(() => setLoading(false))
-    };
+    }
 
-    return [data.data, data, page?.label, fetch, loading]
+    return [data, fetch, loading]
 }

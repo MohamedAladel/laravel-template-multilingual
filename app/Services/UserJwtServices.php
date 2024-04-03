@@ -12,16 +12,16 @@ class UserJwtServices
 {
     const ALGO = 'HS256';
 
-    const EXPIRED = 120; // minutes
+    const EXPIRED = 1; // minutes
 
-    const KEYPREFIX = 'SmileSquad ';
+    const KEYPREFIX = 'ABCSquad_';
 
     // generate token in login
     public static function generateJwtToken()
     {
-        session()->put('user_login_at', $created_at = now());
+        session()->put('user_login_at', $created_at = now()->format('Y_m_d_H_i_s'));
 
-        $key = auth()->id().$created_at;
+        $key = self::KEYPREFIX . auth()->id() . $created_at;
 
         $value = JWT::encode(
             [
@@ -33,7 +33,9 @@ class UserJwtServices
             self::ALGO
         );
 
-        Cache::put($key, $value, now()->addMinutes(self::EXPIRED));
+        Cache::put($key, $value, now()->addMinutes(self::EXPIRED / 2));
+
+        return $value;
     }
 
     // validate token in api middleware
@@ -56,9 +58,16 @@ class UserJwtServices
     // only call from inertia middleware that accessable to session
     public static function getActiveToken()
     {
-        $user_id = auth()->id();
         $login_at = session()->get('user_login_at');
+        $key = self::KEYPREFIX . auth()->id() . $login_at;
 
-        return Cache::get($user_id.$login_at, '');
+        $existToken = Cache::get($key, '');
+
+        // please renew if session is valid but cache is expired
+        if ($existToken == '' && $login_at != '') {
+            return self::generateJwtToken();
+        }
+
+        return $existToken;
     }
 }
