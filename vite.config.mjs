@@ -15,8 +15,8 @@ export default defineConfig({
             output: {
                 manualChunks: {
                     lodash: ['lodash'],
-                    preline: ['preline'],
                     moment: ['moment'],
+                    daisyui: ['daisyui'],
                     reactdatepicker: ['react-datepicker'],
                     reacttoastify: ['react-toastify'],
                 },

@@ -5,7 +5,7 @@ export default function SearchInput({ onChange, value }) {
     return (
         <div className="relative w-full">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <HiSearch className="text-base dark:text-white" />
+                <HiSearch className="text-base" />
             </div>
             <TextInput
                 placeholder="Search"

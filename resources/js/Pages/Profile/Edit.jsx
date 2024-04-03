@@ -1,17 +1,14 @@
-import React from 'react';
-import { Head } from '@inertiajs/react';
+import React from 'react'
+import { Head } from '@inertiajs/react'
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
-import Card from '@/Components/Preline/Card';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import UpdatePasswordForm from './Partials/UpdatePasswordForm'
+import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm'
+import Card from '@/Components/DaisyUI/Card'
 
 export default function Edit({ mustVerifyEmail, status }) {
     return (
-        <AuthenticatedLayout
-            page={'Home'}
-            action={'Profile'}
-        >
+        <AuthenticatedLayout page={'Home'} action={'Profile'}>
             <Head title="Profile" />
 
             <div className="pb-12 pt-2">
@@ -30,5 +27,5 @@ export default function Edit({ mustVerifyEmail, status }) {
                 </div>
             </div>
         </AuthenticatedLayout>
-    );
+    )
 }

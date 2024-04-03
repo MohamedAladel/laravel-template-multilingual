@@ -1,28 +1,34 @@
-import React from 'react';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import React from 'react'
+import { Link, useForm, usePage } from '@inertiajs/react'
 
-import TextInput from '@/Components/Preline/TextInput';
-import Button from '@/Components/Preline/Button';
+import TextInput from '@/Components/DaisyUI/TextInput'
+import Button from '@/Components/DaisyUI/Button'
 
-export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
-    const user = usePage().props.auth.user;
+export default function UpdateProfileInformation({
+    mustVerifyEmail,
+    status,
+    className,
+}) {
+    const user = usePage().props.auth.user
 
     const { data, setData, patch, errors, processing } = useForm({
         name: user.name,
         email: user.email,
-    });
+    })
 
     const submit = (e) => {
-        e.preventDefault();
-        patch(route('profile.update'));
-    };
+        e.preventDefault()
+        patch(route('profile.update'))
+    }
 
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-white">Profile Information</h2>
+                <h2 className="text-lg font-medium text-base-content">
+                    Profile Information
+                </h2>
 
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-base-content">
                     Update your account's profile information and email address.
                 </p>
             </header>
@@ -71,16 +77,19 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                         {status === 'verification-link-sent' && (
                             <div className="mt-2 font-medium text-sm text-green-600">
-                                A new verification link has been sent to your email address.
+                                A new verification link has been sent to your
+                                email address.
                             </div>
                         )}
                     </div>
                 )}
 
                 <div className="flex items-center gap-4">
-                    <Button onClick={submit} processing={processing}>Save</Button>
+                    <Button onClick={submit} processing={processing}>
+                        Save
+                    </Button>
                 </div>
             </div>
         </section>
-    );
+    )
 }

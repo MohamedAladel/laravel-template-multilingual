@@ -1,10 +1,10 @@
 import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import TextInput from '@/Components/Preline/TextInput'
-import Button from '@/Components/Preline/Button'
+import TextInput from '@/Components/DaisyUI/TextInput'
+import Button from '@/Components/DaisyUI/Button'
 import { Head, useForm } from '@inertiajs/react'
 import { isEmpty } from 'lodash'
-import Card from '@/Components/Preline/Card'
+import Card from '@/Components/DaisyUI/Card'
 
 const extractValue = (set, key) => {
     const find = set.find((s) => s.key === key)
@@ -40,16 +40,15 @@ export default function Setting(props) {
     }
 
     return (
-        <AuthenticatedLayout
-            page={'Setting'}
-            action={['Index']}
-        >
+        <AuthenticatedLayout page={'Setting'} action={['Index']}>
             <Head title="Setting" />
 
             <div>
                 <div className="mx-auto sm:px-6 lg:px-8 overflow-hidden">
                     <Card>
-                        <div className="text-xl font-bold mb-4 dark:text-white">Setting</div>
+                        <div className="text-xl font-bold mb-4 text-base-content">
+                            Setting
+                        </div>
                         <TextInput
                             name="app_name"
                             value={data.app_name}
@@ -61,6 +60,7 @@ export default function Setting(props) {
                             <Button
                                 onClick={handleSubmit}
                                 processing={processing}
+                                type="primary"
                             >
                                 Simpan
                             </Button>

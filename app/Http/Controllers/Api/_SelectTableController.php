@@ -27,21 +27,24 @@ class _SelectTableController extends Controller
         }
 
         $query->select($select_fields)
-            ->limit($request->limit ?? 100);
+            ->limit($request->limit ?? 100)
+            ->where('deleted_at', null);
 
         if ($request->exists('offset')) {
             $query->offset($request->offset);
         }
 
-        $search_field = array_merge(['id'], $select_fields);
+        $search_field = array_unique(array_merge(['id'], $select_fields));
         if ($request->exists('searchable_field')) {
             $search_field = array_merge(explode('.', $request->searchable_field), $search_field);
         }
 
         if ($request->exists('q')) {
-            foreach ($search_field as $sq) {
-                $query->orWhere($sq, 'like', '%'.$request->q.'%');
-            }
+            $query->where(function ($query) use ($search_field, $request) {
+                foreach ($search_field as $sq) {
+                    $query->orWhere($sq, 'like', '%' . $request->q . '%');
+                }
+            });
         }
 
         if ($request->exists('orderby')) {

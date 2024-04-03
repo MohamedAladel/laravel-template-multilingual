@@ -4,19 +4,20 @@ import { usePrevious } from 'react-use'
 import { HiPencil, HiTrash } from 'react-icons/hi'
 import { useModalState } from '@/hooks'
 
+import HasPermission from '@/Components/Common/HasPermission'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import Pagination from '@/Components/Pagination'
-import ModalConfirm from '@/Components/Preline/ModalConfirm'
-import SearchInput from '@/Components/Preline/SearchInput'
-import Button from '@/Components/Preline/Button'
-import Dropdown from '@/Components/Preline/Dropdown'
-import HasPermission from '@/Components/Common/HasPermission'
-import Card from '@/Components/Preline/Card'
-import Table from '@/Components/Preline/Table'
+import ModalConfirm from '@/Components/DaisyUI/ModalConfirm'
+import SearchInput from '@/Components/DaisyUI/SearchInput'
+import Button from '@/Components/DaisyUI/Button'
+import Dropdown from '@/Components/DaisyUI/Dropdown'
+import Card from '@/Components/DaisyUI/Card'
 import FormModal from './FormModal'
 
 export default function Index(props) {
-    const { data: { links, data } } = props
+    const {
+        data: { links, data },
+    } = props
 
     const [search, setSearch] = useState('')
     const preValue = usePrevious(search)
@@ -55,20 +56,18 @@ export default function Index(props) {
     }, [search])
 
     return (
-        <AuthenticatedLayout
-            page={'System'}
-            action={'User'}
-        >
+        <AuthenticatedLayout page={'System'} action={'User'}>
             <Head title="User" />
 
             <div>
                 <div className="mx-auto sm:px-6 lg:px-8">
                     <Card>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between mb-4">
                             <HasPermission p="create-user">
                                 <Button
                                     size="sm"
                                     onClick={() => toggleFormModal()}
+                                    type="primary"
                                 >
                                     Tambah
                                 </Button>
@@ -80,75 +79,71 @@ export default function Index(props) {
                                 />
                             </div>
                         </div>
-                        <Table>
-                            <Table.Header className="grid-cols-5">
-                                <Table.HeaderItem className="col-span-2">
-                                    Name
-                                </Table.HeaderItem>
-                                <Table.HeaderItem className="col-span-2">
-                                    Role
-                                </Table.HeaderItem>
-                                <Table.HeaderItem className="col-span-1"/>
-                            </Table.Header>
-                            {data.map((user, index) => (
-                                <Table.Body className="grid-cols-5" key={user.id}>
-                                    <Table.BodyItem className="col-span-2 py-4 px-6 text-start">
-                                            {user.name}
-                                    </Table.BodyItem>
-                                    <Table.BodyItem className="col-span-2 py-4 px-6 text-start">
-                                        {user.role === null
-                                            ? 'System'
-                                            : user.role?.name}
-                                    </Table.BodyItem>
-                                    <Table.BodyItem className="col-span-1 py-4 px-6 text-end">
-                                        <Dropdown
-                                            label={'Opsi'}
-                                            last={index + 1 === +data.length}
-                                        >
-                                            <HasPermission p="update-user">
-                                                <Dropdown.Item
-                                                    onClick={() =>
-                                                        toggleFormModal(
-                                                            user
-                                                        )
-                                                    }
-                                                >
-                                                    <div className="flex space-x-1 items-center">
-                                                        <HiPencil />
-                                                        <div>
-                                                            Ubah
+                        <table className="table mb-4">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th />
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.map((user, index) => (
+                                    <tr key={user.id}>
+                                        <td>{user.name}</td>
+                                        <td>
+                                            {user.role === null
+                                                ? 'System'
+                                                : user.role?.name}
+                                        </td>
+                                        <td className="text-end">
+                                            <Dropdown
+                                                label={'Opsi'}
+                                                last={
+                                                    index + 1 === +data.length
+                                                }
+                                            >
+                                                <HasPermission p="update-user">
+                                                    <Dropdown.Item
+                                                        onClick={() =>
+                                                            toggleFormModal(
+                                                                user
+                                                            )
+                                                        }
+                                                    >
+                                                        <div className="flex space-x-1 items-center">
+                                                            <HiPencil />
+                                                            <div>Ubah</div>
                                                         </div>
-                                                    </div>
-                                                </Dropdown.Item>
-                                            </HasPermission>
-                                            <HasPermission p="delete-user">
-                                                <Dropdown.Item
-                                                    onClick={() =>
-                                                        handleDeleteClick(
-                                                            user
-                                                        )
-                                                    }
-                                                >
-                                                    <div className="flex space-x-1 items-center">
-                                                        <HiTrash />
-                                                        <div>
-                                                            Hapus
+                                                    </Dropdown.Item>
+                                                </HasPermission>
+                                                <HasPermission p="delete-user">
+                                                    <Dropdown.Item
+                                                        onClick={() =>
+                                                            handleDeleteClick(
+                                                                user
+                                                            )
+                                                        }
+                                                    >
+                                                        <div className="flex space-x-1 items-center">
+                                                            <HiTrash />
+                                                            <div>Hapus</div>
                                                         </div>
-                                                    </div>
-                                                </Dropdown.Item>
-                                            </HasPermission>
-                                        </Dropdown>
-                                        </Table.BodyItem>
-                                </Table.Body>
-                            ))}
-                        </Table>
+                                                    </Dropdown.Item>
+                                                </HasPermission>
+                                            </Dropdown>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                         <div className="w-full overflow-x-auto flex lg:justify-center">
                             <Pagination links={links} params={params} />
                         </div>
                     </Card>
                 </div>
             </div>
-            <ModalConfirm modalState={confirmModal} onConfirm={onDelete} />
+            <ModalConfirm onConfirm={onDelete} modalState={confirmModal} />
             <FormModal modalState={formModal} />
         </AuthenticatedLayout>
     )
