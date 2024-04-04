@@ -18,24 +18,8 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = [
-            ['id' => Str::ulid(), 'label' => 'View Dashboard', 'name' => 'view-dashboard'],
-
-            ['id' => Str::ulid(), 'label' => 'Create User', 'name' => 'create-user'],
-            ['id' => Str::ulid(), 'label' => 'Update User', 'name' => 'update-user'],
-            ['id' => Str::ulid(), 'label' => 'View User', 'name' => 'view-user'],
-            ['id' => Str::ulid(), 'label' => 'Delete User', 'name' => 'delete-user'],
-
-            ['id' => Str::ulid(), 'label' => 'Create Role', 'name' => 'create-role'],
-            ['id' => Str::ulid(), 'label' => 'Update Role', 'name' => 'update-role'],
-            ['id' => Str::ulid(), 'label' => 'View Role', 'name' => 'view-role'],
-            ['id' => Str::ulid(), 'label' => 'Delete Role', 'name' => 'delete-role'],
-
-            ['id' => Str::ulid(), 'label' => 'View Setting', 'name' => 'view-setting'],
-        ];
-
-        foreach ($permissions as $permission) {
-            Permission::insert($permission);
+        foreach (Permission::LIST as $permission) {
+            Permission::insert(['id' => Str::ulid(), ...$permission]);
         }
 
         $role = Role::create(['name' => 'admin']);
@@ -51,15 +35,11 @@ class PermissionSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        $admin = User::create([
+        User::create([
             'name' => 'Administator',
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'),
             'role_id' => $role->id,
         ]);
-
-        $setting = [];
-
-        Setting::insert($setting);
     }
 }

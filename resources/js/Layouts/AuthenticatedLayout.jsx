@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
+import { Toaster, toast } from 'sonner'
 import { router, usePage } from '@inertiajs/react'
 import { HiMenu } from 'react-icons/hi'
 import { isArray, isEmpty } from 'lodash'
@@ -113,7 +113,13 @@ export default function Authenticated({ children, page = '', action = '' }) {
                 )}
                 <div className="py-4">{children}</div>
             </main>
-            <ToastContainer />
+            <Toaster
+                theme="system"
+                toastOptions={{
+                    duration: 3000,
+                    dismissible: true,
+                }}
+            />
         </div>
     )
 }

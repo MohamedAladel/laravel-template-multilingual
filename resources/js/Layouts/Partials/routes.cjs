@@ -1,8 +1,4 @@
-import {
-    HiChartPie,
-    HiUser,
-    HiCog,
-} from 'react-icons/hi'
+import { HiChartPie, HiUser, HiCog } from 'react-icons/hi'
 
 export default [
     {
