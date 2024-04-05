@@ -42,7 +42,7 @@ class _SelectTableController extends Controller
         if ($request->exists('q')) {
             $query->where(function ($query) use ($search_field, $request) {
                 foreach ($search_field as $sq) {
-                    $query->orWhere($sq, 'like', '%' . $request->q . '%');
+                    $query->orWhere($sq, 'like', '%'.$request->q.'%');
                 }
             });
         }

@@ -3,11 +3,8 @@
 namespace App\Generators\Commands;
 
 use App\Generators\ScaffoldFileGenerator;
-use App\Services\LaravelStub;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 use function Laravel\Prompts\select;
 
@@ -65,8 +62,5 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
             'Scaffold Modal' => ScaffoldFileGenerator::ScaffoldModal($model),
             '' => ''
         };
-
-
-        $this->info('Done');
     }
 }

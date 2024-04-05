@@ -10,36 +10,26 @@ class StubFileGenerator
 {
     /**
      * Stub path.
-     *
-     * @var string
      */
     protected string $from;
 
     /**
      * Stub destination path.
-     *
-     * @var string
      */
     protected string $to;
 
     /**
      * The new name of stub file.
-     *
-     * @var string
      */
     protected string $name;
 
     /**
      * The stub extension.
-     *
-     * @var string|null
      */
-    protected string|null $ext;
+    protected ?string $ext;
 
     /**
      * The list of replaces.
-     *
-     * @var array
      */
     protected array $replaces;
 
@@ -121,13 +111,18 @@ class StubFileGenerator
     public function generate(): bool
     {
         // Check path is valid
-        if (!File::exists($this->from)) {
+        if (! File::exists($this->from)) {
             throw new RuntimeException('The stub file does not exist, please enter a valid path.');
         }
 
+        // Check destination dir is exists
+        if (! File::isDirectory($this->to)) {
+            File::makeDirectory($this->to, 0755, true);
+        }
+
         // Check destination path is valid
-        if (!File::isDirectory($this->to)) {
-            throw new RuntimeException('The given folder path is not valid.');
+        if (! File::isDirectory($this->to)) {
+            throw new RuntimeException('The given folder path is not valid : '.$this->to);
         }
 
         // Get file content
@@ -158,7 +153,7 @@ class StubFileGenerator
         $path = "{$this->to}/{$this->name}";
 
         // Add extension
-        if (!is_null($this->ext)) {
+        if (! is_null($this->ext)) {
             $path .= ".$this->ext";
         }
 

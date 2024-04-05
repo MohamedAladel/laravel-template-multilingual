@@ -57,6 +57,6 @@ class SyncPermission extends Command
             }
         }
 
-        $this->info('Permission synced : ' . count($to_add) . ' added, ' . count($to_delete) . ' deleted');
+        $this->info('Permission synced : '.count($to_add).' added, '.count($to_delete).' deleted');
     }
 }
