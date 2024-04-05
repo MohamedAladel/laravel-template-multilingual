@@ -19,10 +19,11 @@ class PermissionGenerator
         // Open the file in read mode to read its contents
         $file = File::get(app_path('Constants/PermissionConst.php'));
 
-        $position = strpos($file, "// #Add New Permission Below!\n");
+        $marker = "// #Add New Permission Below!\n";
+        $position = strpos($file, $marker) + strlen($marker);
 
         if (!$position) {
-            throw new Exception('Permission marker is not set');
+            throw new Exception('PermissionConst marker is not set');
         }
 
         $file = substr_replace($file, $permission, $position, 0);
