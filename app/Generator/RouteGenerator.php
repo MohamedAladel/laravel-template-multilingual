@@ -1,24 +1,34 @@
 <?php
 
-namespace App\Generators;
+namespace App\Generator;
 
 use Illuminate\Support\Facades\File;
 
 class RouteGenerator
 {
-    public static function addUse($contoller)
+    public static function new()
     {
-        $use = "\n".'use App\Http\Controllers'.'\\'.$contoller.";\n";
+        return new RouteGenerator;
+    }
+
+    public function addWebUse($model)
+    {
+        $contoller = $model . 'Controller';
+        $use = "\n" . 'use App\Http\Controllers' . '\\' . $contoller . ';';
         // Open the file in read mode to read its contents
         $file = File::get(base_path('routes/web.php'));
-        $position = strpos($file, '<?php ') + 6;
+        $position = strpos($file, '<?php \n') + 6;
         $file = substr_replace($file, $use, $position, 0);
         // Open the file in write mode to overwrite its contents
         File::put(base_path('routes/web.php'), $file);
+
+        return $this;
     }
 
-    public static function toWeb($method, $uri, $contoller, $func = null, $name = null, $positionName = null)
+    public function addWebRoute($method, $uri, $model, $func = null, $name = null, $positionName = null)
     {
+        $contoller = $model . 'Controller';
+
         $route = "\nRoute::$method('$uri'";
 
         if ($func == null) {
@@ -50,5 +60,14 @@ class RouteGenerator
         }
 
         return $position;
+    }
+
+    public function addWebRoutes(array $routes)
+    {
+        foreach ($routes as $route) {
+            $this->addWebRoute(...$route);
+        }
+
+        return $this;
     }
 }

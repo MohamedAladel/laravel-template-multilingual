@@ -3,6 +3,7 @@ import { Link, router, usePage } from '@inertiajs/react'
 import { HiLogout } from 'react-icons/hi'
 import { filterAllowedMenu } from './helpers.cjs'
 import routes from './routes.cjs'
+import { isEmpty } from 'lodash'
 
 const SidebarItem = ({ item }) => {
     return (
@@ -56,12 +57,19 @@ export default function SidebarNav({ user, show }) {
     } = usePage()
     const menus = routes.filter((item) => {
         item.open = false
+
         if (!item.show) {
             return null
         }
+
         if (user.role === null) {
             return filterAllowedMenu(user, item)
         }
+
+        if (isEmpty(item.permission)) {
+            return item
+        }
+
         if (user.role.permissions.find((p) => p.name === item.permission)) {
             return item
         }
