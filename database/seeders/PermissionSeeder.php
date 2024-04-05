@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants\PermissionConst;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -17,7 +18,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        foreach (Permission::LIST as $permission) {
+        foreach (PermissionConst::LIST as $permission) {
             Permission::insert(['id' => Str::ulid(), ...$permission]);
         }
 

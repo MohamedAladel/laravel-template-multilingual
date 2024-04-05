@@ -2,6 +2,7 @@
 
 namespace App\Generator;
 
+use App\Services\PermissionServices;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -19,7 +20,7 @@ class ScaffoldFileGenerator
 
     public function __construct(
         public string $model,
-        public bool $protected = false,
+        public bool $adminAccess = false,
         public array $fields = []
     ) {
         $this->model = Str::lower($this->model);
@@ -65,7 +66,7 @@ class ScaffoldFileGenerator
                 ->replaces($replaces)
                 ->generate();
 
-            $positionName = $this->protected ? '// #Admin' : null;
+            $positionName = $this->adminAccess ? '// #Admin' : null;
             // Web Router
             RouteGenerator::new()
                 ->addWebUse($this->Model)
@@ -75,6 +76,9 @@ class ScaffoldFileGenerator
                     ['put', $this->models . '/{' . $this->model . '}', $this->Model, 'update', $this->models . '.update', $positionName],
                     ['delete', $this->models . '/{' . $this->model . '}', $this->Model, 'destroy', $this->models . '.destroy', $positionName],
                 ]);
+
+            // Permission 
+            $this->createResourcePermissions();
         } catch (\Exception $e) {
             $this->removeDefaultDestinations();
             error('Failed to create scaffold');
@@ -117,11 +121,14 @@ class ScaffoldFileGenerator
                 ->replaces($replaces)
                 ->generate();
 
-            $positionName = $this->protected ? '// #Admin' : null;
+            $positionName = $this->adminAccess ? '// #Admin' : null;
             // Web Router
             RouteGenerator::new()
                 ->addWebUse($this->Model)
-                ->addWebRoute('resource', $this->models, $this->Model);
+                ->addWebRoute('resource', $this->models, $this->Model, positionName: $positionName);
+
+            // Permission 
+            $this->createResourcePermissions();
         } catch (\Exception $e) {
             $this->removeDefaultDestinations();
             error('Failed to create scaffold');
@@ -143,5 +150,18 @@ class ScaffoldFileGenerator
         foreach ($this->defaultDestinations['files'] as $d) {
             File::delete($d);
         }
+    }
+
+    private function createResourcePermissions()
+    {
+        PermissionGenerator::new()
+            ->addPermissions([
+                ['view-' . $this->model, 'View ' . $this->Model],
+                ['create-' . $this->model, 'Create ' . $this->Model],
+                ['update-' . $this->model, 'Update ' . $this->Model],
+                ['delete-' . $this->model, 'Delete ' . $this->Model],
+            ]);
+
+        PermissionServices::new()->sync();
     }
 }

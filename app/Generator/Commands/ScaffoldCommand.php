@@ -59,9 +59,9 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
             options: ['Scaffold Modal', 'Scaffold Page', 'Single Page'],
             default: 'Scaffold Modal',
         );
-        $confirmed = confirm('Only admin allowed?');
+        $adminOnly = confirm('Only admin allowed ?');
 
-        $scaffold = (new ScaffoldFileGenerator(model: $model, protected: $confirmed));
+        $scaffold = (new ScaffoldFileGenerator($model, $adminOnly));
 
         match ($type) {
             'Scaffold Modal' => $scaffold->ScaffoldModal(),

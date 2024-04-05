@@ -15,11 +15,12 @@ class RouteGenerator
     {
         $contoller = $model . 'Controller';
         $use = "\n" . 'use App\Http\Controllers' . '\\' . $contoller . ';';
-        // Open the file in read mode to read its contents
+
         $file = File::get(base_path('routes/web.php'));
+
         $position = strpos($file, '<?php \n') + 6;
         $file = substr_replace($file, $use, $position, 0);
-        // Open the file in write mode to overwrite its contents
+
         File::put(base_path('routes/web.php'), $file);
 
         return $this;
@@ -32,7 +33,7 @@ class RouteGenerator
         $route = "\nRoute::$method('$uri'";
 
         if ($func == null) {
-            $route .= ", '$contoller');\n";
+            $route .= ", $contoller::class)";
         } else {
             $route .= ", [$contoller::class,'$func'])";
         }
@@ -43,20 +44,17 @@ class RouteGenerator
 
         $route .= ';';
 
-        // Open the file in read mode to read its contents
-        $file = File::get(base_path('routes/web.php'));
+        $routePath = base_path('routes/web.php');
+        $file = File::get($routePath);
 
         $position = -1;
         if ($positionName != null) {
             $position = strpos($file, $positionName) + strlen($positionName) ?: -1;
         }
 
-        // Insert the new string at the specified position
         if ($position) {
             $file = substr_replace($file, $route, $position, 0);
-
-            // Open the file in write mode to overwrite its contents
-            File::put(base_path('routes/web.php'), $file);
+            File::put($routePath, $file);
         }
 
         return $position;
