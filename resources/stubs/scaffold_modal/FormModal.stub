@@ -69,17 +69,18 @@ export default function FormModal(props) {
                     error={errors.name}
                 />
 
-            <div className="flex items-center space-x-2 mt-4">
-                <Button
-                    onClick={handleSubmit}
-                    processing={processing}
-                    type="primary"
-                >
-                    Simpan
-                </Button>
-                <Button onClick={handleClose} type="secondary">
-                    Batal
-                </Button>
+                <div className="flex items-center space-x-2 mt-4">
+                    <Button
+                        onClick={handleSubmit}
+                        processing={processing}
+                        type="primary"
+                    >
+                        Simpan
+                    </Button>
+                    <Button onClick={handleClose} type="secondary">
+                        Batal
+                    </Button>
+                </div>
             </div>
         </Modal>
     )
