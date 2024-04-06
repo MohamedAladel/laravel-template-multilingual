@@ -3,7 +3,7 @@
 use App\Models\User;
 
 test('login screen can be rendered', function () {
-    $response = $this->get('/login');
+    $response = $this->withHeaders(['Accept' => 'application/json'])->get('/login');
 
     $response->assertStatus(200);
     $response->assertSee('email');
