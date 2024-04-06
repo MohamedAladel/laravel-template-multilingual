@@ -1,10 +1,12 @@
 import React from 'react'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import TextInput from '@/Components/DaisyUI/TextInput'
-import Button from '@/Components/DaisyUI/Button'
 import { Head, useForm } from '@inertiajs/react'
 import { isEmpty } from 'lodash'
+
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import Card from '@/Components/DaisyUI/Card'
+import TextInput from '@/Components/DaisyUI/TextInput'
+import Button from '@/Components/DaisyUI/Button'
+import FormFile from '@/Components/DaisyUI/FormFile'
 
 const extractValue = (set, key) => {
     const find = set.find((s) => s.key === key)
@@ -20,8 +22,10 @@ const extractValue = (set, key) => {
 export default function Setting(props) {
     const { setting } = props
 
+    const app_logo_url = extractValue(setting, 'app_logo')
     const { data, setData, post, processing, errors } = useForm({
         app_name: extractValue(setting, 'app_name'),
+        app_logo: null,
     })
 
     const handleOnChange = (event) => {
@@ -55,6 +59,15 @@ export default function Setting(props) {
                             onChange={handleOnChange}
                             label="App Name"
                             error={errors.app_name}
+                        />
+                        <FormFile
+                            label={'App Logo'}
+                            onChange={(file_path) =>
+                                setData('app_logo', file_path)
+                            }
+                            error={errors.app_logo}
+                            url={app_logo_url}
+                            filemimes="image/jpg,image/jpeg,image/png"
                         />
                         <div className="mt-4">
                             <Button

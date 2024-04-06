@@ -19,6 +19,7 @@ class SettingController extends Controller
     {
         $request->validate([
             'app_name' => 'required|string',
+            'app_logo' => 'nullable|string',
         ]);
 
         DB::beginTransaction();

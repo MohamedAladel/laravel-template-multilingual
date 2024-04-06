@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from 'react'
+import React from 'react'
 import { HiX } from 'react-icons/hi'
 
 export default function Modal({ children, title = '', isOpen, onClose }) {
