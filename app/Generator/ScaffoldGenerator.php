@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-use function Laravel\Prompts\error;
-use function Laravel\Prompts\info;
-
 class ScaffoldGenerator
 {
     private string $model;
@@ -39,12 +36,12 @@ class ScaffoldGenerator
         $this->fields = $fields;
 
         $this->defaultDestinations = [
-            'files' => [app_path('Http/Controllers/') . $this->Model . 'Controller.php'],
-            'dirs' => [resource_path('js/Pages/') . $this->models],
+            'files' => [app_path('Http/Controllers/').$this->Model.'Controller.php'],
+            'dirs' => [resource_path('js/Pages/').$this->models],
         ];
 
         if ($this->createModelClass) {
-            Artisan::call('make:model ' . $this->Model . ' -m');
+            Artisan::call('make:model '.$this->Model.' -m');
         }
     }
 
@@ -65,21 +62,22 @@ class ScaffoldGenerator
             RouteGenerator::new()
                 ->addWebUse($this->Model)
                 ->addWebRoutes([
-                    ['get', $this->models, $this->Model, 'index', $this->models . '.index', $positionName],
-                    ['post', $this->models, $this->Model, 'store', $this->models . '.store', $positionName],
-                    ['put', $this->models . '/{' . $this->model . '}', $this->Model, 'update', $this->models . '.update', $positionName],
-                    ['delete', $this->models . '/{' . $this->model . '}', $this->Model, 'destroy', $this->models . '.destroy', $positionName],
+                    ['get', $this->models, $this->Model, 'index', $this->models.'.index', $positionName],
+                    ['post', $this->models, $this->Model, 'store', $this->models.'.store', $positionName],
+                    ['put', $this->models.'/{'.$this->model.'}', $this->Model, 'update', $this->models.'.update', $positionName],
+                    ['delete', $this->models.'/{'.$this->model.'}', $this->Model, 'destroy', $this->models.'.destroy', $positionName],
                 ]);
 
-            // Permission 
+            // Permission
             $this->createResourcePermissions();
         } catch (\Exception $e) {
             $this->removeDefaultDestinations();
-            error('Failed to create scaffold');
             Log::info(self::class, ['message' => $e->getMessage()]);
+
+            return false;
         }
 
-        info('Scaffold created successfully.');
+        return true;
     }
 
     public function ScaffoldPage()
@@ -100,15 +98,16 @@ class ScaffoldGenerator
                 ->addWebUse($this->Model)
                 ->addWebRoute('resource', $this->models, $this->Model, positionName: $positionName);
 
-            // Permission 
+            // Permission
             $this->createResourcePermissions();
         } catch (\Exception $e) {
             $this->removeDefaultDestinations();
-            error('Failed to create scaffold');
             Log::info(self::class, ['message' => $e->getMessage()]);
+
+            return false;
         }
 
-        info('Scaffold created successfully.');
+        return true;
     }
 
     public function ScaffoldSinglePage()
@@ -128,20 +127,21 @@ class ScaffoldGenerator
             RouteGenerator::new()
                 ->addWebUse($this->Model)
                 ->addWebRoutes([
-                    ['get', $this->models, $this->Model, 'index', $this->models . '.index', $positionName],
-                    ['post', $this->models, $this->Model, 'update', $this->models . '.update', $positionName],
+                    ['get', $this->models, $this->Model, 'index', $this->models.'.index', $positionName],
+                    ['post', $this->models, $this->Model, 'update', $this->models.'.update', $positionName],
                 ]);
 
-            // Permission 
-            PermissionGenerator::new()->addPermission('view-' . $this->model, 'View ' . $this->Model);
+            // Permission
+            PermissionGenerator::new()->addPermission('view-'.$this->model, 'View '.$this->Model);
             PermissionServices::new()->sync();
         } catch (\Exception $e) {
             $this->removeDefaultDestinations();
-            error('Failed to create scaffold');
             Log::info(self::class, ['message' => $e->getMessage()]);
+
+            return false;
         }
 
-        info('Scaffold created successfully.');
+        return true;
     }
 
     private function removeDefaultDestinations()
@@ -158,10 +158,10 @@ class ScaffoldGenerator
     {
         PermissionGenerator::new()
             ->addPermissions([
-                ['view-' . $this->model, 'View ' . $this->Model],
-                ['create-' . $this->model, 'Create ' . $this->Model],
-                ['update-' . $this->model, 'Update ' . $this->Model],
-                ['delete-' . $this->model, 'Delete ' . $this->Model],
+                ['view-'.$this->model, 'View '.$this->Model],
+                ['create-'.$this->model, 'Create '.$this->Model],
+                ['update-'.$this->model, 'Update '.$this->Model],
+                ['delete-'.$this->model, 'Delete '.$this->Model],
             ]);
 
         PermissionServices::new()->sync();

@@ -37,6 +37,6 @@ class SyncPermission extends Command
     public function handle()
     {
         [$to_add, $to_delete] = PermissionServices::new()->sync();
-        $this->info('Permission synced : ' . count($to_add) . ' added, ' . count($to_delete) . ' deleted');
+        $this->info('Permission synced : '.count($to_add).' added, '.count($to_delete).' deleted');
     }
 }

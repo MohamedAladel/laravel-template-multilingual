@@ -56,8 +56,8 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
         $model = $this->argument('model');
 
         $createModelClass = false;
-        if (!File::exists(app_path('Models/' . $model . '.php'))) {
-            $createModelClass = confirm('Model ' . $model . ' is not exist, create it ?');
+        if (! File::exists(app_path('Models/'.$model.'.php'))) {
+            $createModelClass = confirm('Model '.$model.' is not exist, create it ?');
         }
 
         $type = select(
@@ -69,10 +69,16 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
 
         $scaffold = new ScaffoldGenerator($model, $adminOnly, createModelClass: $createModelClass);
 
-        match ($type) {
+        $result = match ($type) {
             'Scaffold Modal' => $scaffold->ScaffoldModal(),
             'Scaffold Page' => $scaffold->ScaffoldPage(),
             'Single Page' => $scaffold->ScaffoldSinglePage(),
         };
+
+        if ($result) {
+            $this->info('Scaffold generated successfully');
+        } else {
+            $this->error('Scaffold generated failed');
+        }
     }
 }
