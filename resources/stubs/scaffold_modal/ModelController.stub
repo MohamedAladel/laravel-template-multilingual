@@ -56,7 +56,7 @@ class {{ Model }}Controller extends Controller
 
     public function destroy({{ Model }} ${{ model }}): RedirectResponse
     {
-         ${{ model }}->delete();
+        ${{ model }}->delete();
 
         return redirect()->route('{{ models }}.index')
             ->with('message', ['type' => 'success', 'message' => 'Item has beed deleted']);

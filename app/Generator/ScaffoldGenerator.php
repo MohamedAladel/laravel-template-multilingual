@@ -44,7 +44,7 @@ class ScaffoldGenerator
         ];
 
         if ($this->createModelClass) {
-            Artisan::call('make:model ' . ['name' => $this->Model, '--migration' => true]);
+            Artisan::call('make:model ' . $this->Model . ' -m');
         }
     }
 
