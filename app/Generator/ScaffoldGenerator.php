@@ -111,8 +111,37 @@ class ScaffoldGenerator
         info('Scaffold created successfully.');
     }
 
-    public static function ScaffoldSinglePage()
+    public function ScaffoldSinglePage()
     {
+        $replaces = [
+            'model' => $this->model,
+            'models' => $this->models,
+            'Model' => $this->Model,
+        ];
+
+        try {
+            // File: ModelController.php, Index.jsx
+            FileGenerator::new()->ScaffoldSinglePage($this->model, $replaces);
+
+            // Web Router
+            $positionName = $this->adminAccess ? '// #Admin' : null;
+            RouteGenerator::new()
+                ->addWebUse($this->Model)
+                ->addWebRoutes([
+                    ['get', $this->models, $this->Model, 'index', $this->models . '.index', $positionName],
+                    ['post', $this->models, $this->Model, 'update', $this->models . '.update', $positionName],
+                ]);
+
+            // Permission 
+            PermissionGenerator::new()->addPermission('view-' . $this->model, 'View ' . $this->Model);
+            PermissionServices::new()->sync();
+        } catch (\Exception $e) {
+            $this->removeDefaultDestinations();
+            error('Failed to create scaffold');
+            Log::info(self::class, ['message' => $e->getMessage()]);
+        }
+
+        info('Scaffold created successfully.');
     }
 
     private function removeDefaultDestinations()

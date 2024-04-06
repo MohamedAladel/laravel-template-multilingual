@@ -68,7 +68,24 @@ class FileGenerator
             ->replaces($replaces)
             ->generate();
     }
-    public static function ScaffoldSinglePage()
+    public function ScaffoldSinglePage($model, $replaces)
     {
+        $this->model = Str::ucfirst($model);
+
+        // ModelController.php
+        (new StubFileGenerator)->from(base_path('resources/stubs/single_page/') . 'ModelController.stub')
+            ->to(app_path('Http/Controllers/'))
+            ->name($this->model . 'Controller')
+            ->ext('php')
+            ->replaces($replaces)
+            ->generate();
+
+        // Index.jsx
+        (new StubFileGenerator)->from(base_path('resources/stubs/single_page/') . 'Index.stub')
+            ->to(resource_path('js/Pages/') . $this->model . '/')
+            ->name('Index')
+            ->ext('jsx')
+            ->replaces($replaces)
+            ->generate();
     }
 }
