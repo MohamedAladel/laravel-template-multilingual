@@ -75,7 +75,7 @@ php artisan scaffold
 
 will ask you few options
 
-![](screenshot_generator.gif?raw=true)
+![](screenshot_generator.png?raw=true)
 
 in above example you will can see the result by access [http://localhost/customers](http://localhost/customers) or add menu to sidebar with
 
