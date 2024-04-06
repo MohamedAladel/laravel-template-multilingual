@@ -3,6 +3,7 @@
 namespace App\Generator;
 
 use App\Services\PermissionServices;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -10,27 +11,41 @@ use Illuminate\Support\Str;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\info;
 
-class ScaffoldFileGenerator
+class ScaffoldGenerator
 {
+    private string $model;
+
     private string $models;
 
     private string $Model;
 
+    private bool $adminAccess = false;
+
     private array $defaultDestinations;
 
+    private array $fields; //not yet used
+
     public function __construct(
-        public string $model,
-        public bool $adminAccess = false,
-        public array $fields = []
+        string $model,
+        bool $adminAccess = false,
+        array $fields = [],
+        public $createModelClass = false,
     ) {
-        $this->model = Str::lower($this->model);
+        $this->model = Str::lower($model);
         $this->models = Str::plural($this->model);
         $this->Model = Str::ucfirst($this->model);
+
+        $this->adminAccess = $adminAccess;
+        $this->fields = $fields;
 
         $this->defaultDestinations = [
             'files' => [app_path('Http/Controllers/') . $this->Model . 'Controller.php'],
             'dirs' => [resource_path('js/Pages/') . $this->models],
         ];
+
+        if ($this->createModelClass) {
+            Artisan::call('make:model ' . ['name' => $this->Model, '--migration' => true]);
+        }
     }
 
     public function ScaffoldModal()
@@ -42,32 +57,11 @@ class ScaffoldFileGenerator
         ];
 
         try {
-            // ModelController.php
-            (new StubFileGenerator)->from(base_path('resources/stubs/scaffold_modal/') . 'ModelController.stub')
-                ->to(app_path('Http/Controllers/'))
-                ->name($this->Model . 'Controller')
-                ->ext('php')
-                ->replaces($replaces)
-                ->generate();
+            // File: ModelController.php, Index.jsx, FormModal.jsx
+            FileGenerator::new()->ScaffoldModal($this->model, $replaces);
 
-            // Index.jsx
-            (new StubFileGenerator)->from(base_path('resources/stubs/scaffold_modal/') . 'Index.stub')
-                ->to(resource_path('js/Pages/') . $this->Model . '/')
-                ->name('Index')
-                ->ext('jsx')
-                ->replaces($replaces)
-                ->generate();
-
-            // FormModal.jsx
-            (new StubFileGenerator)->from(base_path('resources/stubs/scaffold_modal/') . 'FormModal.stub')
-                ->to(resource_path('js/Pages/') . $this->Model . '/')
-                ->name('FormModal')
-                ->ext('jsx')
-                ->replaces($replaces)
-                ->generate();
-
-            $positionName = $this->adminAccess ? '// #Admin' : null;
             // Web Router
+            $positionName = $this->adminAccess ? '// #Admin' : null;
             RouteGenerator::new()
                 ->addWebUse($this->Model)
                 ->addWebRoutes([
@@ -97,32 +91,11 @@ class ScaffoldFileGenerator
         ];
 
         try {
-            // ModelController.php
-            (new StubFileGenerator)->from(base_path('resources/stubs/scaffold_page/') . 'ModelController.stub')
-                ->to(app_path('Http/Controllers/'))
-                ->name($this->Model . 'Controller')
-                ->ext('php')
-                ->replaces($replaces)
-                ->generate();
+            // File: ModelController.php, Index.jsx, Form.jsx
+            FileGenerator::new()->ScaffoldPage($this->model, $replaces);
 
-            // Index.jsx
-            (new StubFileGenerator)->from(base_path('resources/stubs/scaffold_page/') . 'Index.stub')
-                ->to(resource_path('js/Pages/') . $this->Model . '/')
-                ->name('Index')
-                ->ext('jsx')
-                ->replaces($replaces)
-                ->generate();
-
-            // FormModal.jsx
-            (new StubFileGenerator)->from(base_path('resources/stubs/scaffold_page/') . 'Form.stub')
-                ->to(resource_path('js/Pages/') . $this->Model . '/')
-                ->name('Form')
-                ->ext('jsx')
-                ->replaces($replaces)
-                ->generate();
-
-            $positionName = $this->adminAccess ? '// #Admin' : null;
             // Web Router
+            $positionName = $this->adminAccess ? '// #Admin' : null;
             RouteGenerator::new()
                 ->addWebUse($this->Model)
                 ->addWebRoute('resource', $this->models, $this->Model, positionName: $positionName);

@@ -2,9 +2,10 @@
 
 namespace App\Generator\Commands;
 
-use App\Generator\ScaffoldFileGenerator;
+use App\Generator\ScaffoldGenerator;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
+use Illuminate\Support\Facades\File;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\select;
@@ -54,6 +55,11 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
     {
         $model = $this->argument('model');
 
+        $createModelClass = false;
+        if (!File::file_exists(app_path('Models/' . $model . '.php'))) {
+            $createModelClass = confirm('model ' . $model . ' is not exist, create it ?');
+        }
+
         $type = select(
             label: 'Which type to generate ?',
             options: ['Scaffold Modal', 'Scaffold Page', 'Single Page'],
@@ -61,7 +67,7 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
         );
         $adminOnly = confirm('Only admin allowed ?');
 
-        $scaffold = (new ScaffoldFileGenerator($model, $adminOnly));
+        $scaffold = new ScaffoldGenerator($model, $adminOnly, createModelClass: $createModelClass);
 
         match ($type) {
             'Scaffold Modal' => $scaffold->ScaffoldModal(),
