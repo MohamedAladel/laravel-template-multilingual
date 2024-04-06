@@ -19,11 +19,7 @@ class PermissionConst
 
         ['label' => 'View Setting', 'name' => 'view-setting'],
 
-        ['label' => 'Create customer', 'name' => 'create-customer'],
-        ['label' => 'Update customer', 'name' => 'update-customer'],
-        ['label' => 'View customer', 'name' => 'view-customer'],
-        ['label' => 'Delete customer', 'name' => 'delete-customer'],
-
         // #Add New Permission Below!
+
     ];
 }

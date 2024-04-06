@@ -26,7 +26,7 @@ class SyncPermission extends Command
      */
     protected function configure()
     {
-        $this->setAliases(['sync-permission', 'syncp', 'sp']);
+        $this->setAliases(['sync-permission', 'syncp', 'sp', 'permission-sync', 'permsync']);
 
         parent::configure();
     }

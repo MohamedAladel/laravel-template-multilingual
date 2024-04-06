@@ -38,12 +38,4 @@ export default [
         active: 'setting.index',
         permission: 'view-setting',
     },
-    {
-        name: 'Customer',
-        show: true,
-        icon: HiCog,
-        route: route('customers.index'),
-        active: 'customers.index',
-        permission: 'view-setting-customers',
-    },
 ]
