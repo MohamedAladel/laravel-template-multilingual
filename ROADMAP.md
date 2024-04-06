@@ -1,6 +1,6 @@
 ## TODO
 
--   [ ] find something new
+-   [ ] add script to generate bundle.zip for hosting upload (exculde node_modules, raw js file, generator, roadmap, any gif)
 
 ## NICE TO CREATE
 
