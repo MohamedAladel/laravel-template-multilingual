@@ -51,9 +51,7 @@ export default function FormFile({
                 setName(response.data.name_original)
             })
             .catch((error) => {
-                toast(error.response.data.message, {
-                    type: 'error',
-                })
+                toast.error(error.response.data.message)
             })
             .finally(() => {
                 setLoading(false)

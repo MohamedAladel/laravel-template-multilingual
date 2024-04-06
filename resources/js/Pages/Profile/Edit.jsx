@@ -8,7 +8,7 @@ import Card from '@/Components/DaisyUI/Card'
 
 export default function Edit({ mustVerifyEmail, status }) {
     return (
-        <AuthenticatedLayout page={'Home'} action={'Profile'}>
+        <AuthenticatedLayout page={'System'} action={'Profile'}>
             <Head title="Profile" />
 
             <div className="pb-12 pt-2">

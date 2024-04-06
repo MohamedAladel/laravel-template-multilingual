@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { toast } from 'sonner'
 import { isEmpty } from 'lodash'
 
 export const formatDate = (date) => {
@@ -61,4 +62,16 @@ export const hasPermission = (auth, permission) => {
         return true
     }
     return false
+}
+
+export const showToast = (message, type) => {
+    if (type === 'success') {
+        toast.success(message)
+        return
+    }
+    if (type === 'error') {
+        toast.error(message)
+        return
+    }
+    toast(message)
 }

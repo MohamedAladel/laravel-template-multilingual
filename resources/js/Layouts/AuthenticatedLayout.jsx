@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Toaster, toast } from 'sonner'
 import { router, usePage } from '@inertiajs/react'
-import { HiMenu } from 'react-icons/hi'
+import { Toaster } from 'sonner'
 import { isArray, isEmpty } from 'lodash'
+import { themeChange } from 'theme-change'
+import { HiMenu } from 'react-icons/hi'
 
 import Dropdown from '@/Components/Defaults/Dropdown'
 import SidebarNav from './Partials/SidebarNav'
 import Breadcrumb from '@/Components/DaisyUI/Breadcrumb'
 import ThemeSwitch from '@/Components/DaisyUI/ThemeSwitch'
-import { themeChange } from 'theme-change'
+import { showToast } from '@/utils'
 
 export default function Authenticated({ children, page = '', action = '' }) {
     const {
@@ -19,7 +20,7 @@ export default function Authenticated({ children, page = '', action = '' }) {
 
     useEffect(() => {
         if (flash.message !== null) {
-            toast(flash.message.message, { type: flash.message.type })
+            showToast(flash.message.message, flash.message.type)
         }
     }, [flash])
 
@@ -115,6 +116,7 @@ export default function Authenticated({ children, page = '', action = '' }) {
             </main>
             <Toaster
                 theme="system"
+                richColors="true"
                 toastOptions={{
                     duration: 3000,
                     dismissible: true,

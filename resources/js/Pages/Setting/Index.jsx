@@ -44,7 +44,7 @@ export default function Setting(props) {
     }
 
     return (
-        <AuthenticatedLayout page={'Setting'} action={['Index']}>
+        <AuthenticatedLayout page={'System'} action={'Setting'}>
             <Head title="Setting" />
 
             <div>
