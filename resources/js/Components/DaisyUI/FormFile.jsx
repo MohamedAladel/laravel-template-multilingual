@@ -28,7 +28,7 @@ export default function FormFile({
 
     const handleOnChange = (e) => {
         if (isEmpty(e.target.files)) {
-            console.log('target file emptys')
+            console.log('target file empty')
             return
         }
 
@@ -84,7 +84,7 @@ export default function FormFile({
                         }`}
                     >
                         <div className="flex flex-row space-x-2 h-full">
-                            <div className="-ml-4 bg-base-200 h-full rounded-lg rounded-r-none px-4 font-bold flex flex-row items-center">
+                            <div className="-ml-4 bg-base-200 h-full input px-4 font-bold flex flex-row items-center">
                                 <div>Choose a file</div>
                             </div>
                             <div className="text-opacity-35 text-base-content flex flex-row items-center">

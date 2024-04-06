@@ -19,7 +19,7 @@ class Setting extends Model
     ];
 
     protected $appends = [
-        'url'
+        'url',
     ];
 
     public static function getByKey($key): string

@@ -11,7 +11,7 @@ class UploadController extends Controller
 {
     public function show(string $name)
     {
-        return Storage::disk('local')->get('public/' . $name);
+        return Storage::disk('local')->get('public/'.$name);
     }
 
     public function store(Request $request)
@@ -22,7 +22,7 @@ class UploadController extends Controller
         }
 
         $request->validate([
-            'file' => $rule
+            'file' => $rule,
         ]);
 
         $file = $request->file('file');
