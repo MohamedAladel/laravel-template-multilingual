@@ -56,8 +56,8 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
         $model = $this->argument('model');
 
         $createModelClass = false;
-        if (! File::exists(app_path('Models/'.$model.'.php'))) {
-            $createModelClass = confirm('Model '.$model.' is not exist, create it ?');
+        if (!File::exists(app_path('Models/' . $model . '.php'))) {
+            $createModelClass = confirm("App\Models\\" . $model . ' does not exist, create it ?');
         }
 
         $type = select(
