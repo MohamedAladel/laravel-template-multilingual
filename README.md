@@ -1,4 +1,4 @@
-# Laravel Template - Preline
+# Laravel Template - DaisyUI
 
 This just a laravel template with breeze react, user role based access crud with setup <a href="https://daisyui.com?ref=github.com/ajikamaludin" target="_blank">daisyui style</a> admin template
 
