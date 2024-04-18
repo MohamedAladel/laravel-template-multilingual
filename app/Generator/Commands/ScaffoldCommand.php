@@ -62,14 +62,15 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
             return 0;
         }
 
-        if (! $scaffold->isModelExists()) {
-            $scaffold->withCreateModelClass(
-                confirm("App\Models\\".$scaffold->Model.' does not exist, create it ?')
+        if (!$scaffold->isModelExists()) {
+            $_ = $scaffold->withCreateModelClass(
+                $this,
+                $_ = confirm("App\Models\\" . $scaffold->Model . ' does not exist, create it ?')
             );
         }
 
-        $scaffold->withProtectedAdminAccess(
-            confirm('Only admin allowed ?')
+        $_ = $scaffold->withProtectedAdminAccess(
+            $_ = confirm('Only admin allowed ?')
         );
 
         $type = select(
