@@ -5,17 +5,13 @@ import { HiFire } from 'react-icons/hi'
 
 export default function Maintance(props) {
     return (
-        <AuthenticatedLayout page={'Page'} action={'Development Mode'}>
+        <AuthenticatedLayout page={'System'} action={'Development Mode'}>
             <Head title="Masih Dalam Pengembangan" />
 
             <div>
-                <div className="mx-auto sm:px-6 lg:px-8 text-center">
-                    <div className="overflow-hidden py-40 shadow-sm sm:rounded-lg bg-base-300 text-base-content flex justify-center items-center flex-col">
-                        <HiFire className="text-center w-40 h-40" />
-                        <div className="p-6 text-3xl">
-                            Fitur Dalam Pengembangan
-                        </div>
-                    </div>
+                <div className="overflow-hidden py-40 shadow-sm sm:rounded-lg bg-base-300 text-base-content flex justify-center items-center flex-col">
+                    <HiFire className="text-center w-40 h-40" />
+                    <div className="p-6 text-3xl">Fitur Dalam Pengembangan</div>
                 </div>
             </div>
         </AuthenticatedLayout>

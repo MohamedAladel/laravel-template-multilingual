@@ -18,7 +18,9 @@ export default defineConfig({
                     moment: ['moment'],
                     daisyui: ['daisyui'],
                     sonner: ['sonner'],
-                    reactdatepicker: ['react-datepicker'],
+                    reacttailwindcssdatepicker: [
+                        'react-tailwindcss-datepicker',
+                    ],
                 },
             },
         },

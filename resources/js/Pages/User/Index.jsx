@@ -6,7 +6,7 @@ import { useModalState } from '@/hooks'
 
 import HasPermission from '@/Components/Common/HasPermission'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import Pagination from '@/Components/Pagination'
+import Pagination from '@/Components/DaisyUI/Pagination'
 import ModalConfirm from '@/Components/DaisyUI/ModalConfirm'
 import SearchInput from '@/Components/DaisyUI/SearchInput'
 import Button from '@/Components/DaisyUI/Button'
@@ -60,25 +60,25 @@ export default function Index(props) {
             <Head title="User" />
 
             <div>
-                <div className="mx-auto sm:px-6 lg:px-8">
-                    <Card>
-                        <div className="flex justify-between mb-4">
-                            <HasPermission p="create-user">
-                                <Button
-                                    size="sm"
-                                    onClick={() => toggleFormModal()}
-                                    type="primary"
-                                >
-                                    Tambah
-                                </Button>
-                            </HasPermission>
-                            <div className="flex items-center">
-                                <SearchInput
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    value={search}
-                                />
-                            </div>
+                <Card>
+                    <div className="flex justify-between mb-4">
+                        <HasPermission p="create-user">
+                            <Button
+                                size="sm"
+                                onClick={() => toggleFormModal()}
+                                type="primary"
+                            >
+                                Tambah
+                            </Button>
+                        </HasPermission>
+                        <div className="flex items-center">
+                            <SearchInput
+                                onChange={(e) => setSearch(e.target.value)}
+                                value={search}
+                            />
                         </div>
+                    </div>
+                    <div className="overflow-x-auto">
                         <table className="table mb-4">
                             <thead>
                                 <tr>
@@ -137,11 +137,11 @@ export default function Index(props) {
                                 ))}
                             </tbody>
                         </table>
-                        <div className="w-full overflow-x-auto flex lg:justify-center">
-                            <Pagination links={links} params={params} />
-                        </div>
-                    </Card>
-                </div>
+                    </div>
+                    <div className="w-full overflow-x-auto flex lg:justify-center">
+                        <Pagination links={links} params={params} />
+                    </div>
+                </Card>
             </div>
             <ModalConfirm onConfirm={onDelete} modalState={confirmModal} />
             <FormModal modalState={formModal} />

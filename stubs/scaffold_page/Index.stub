@@ -6,7 +6,7 @@ import { HiPencil, HiTrash } from 'react-icons/hi'
 import { useModalState } from '@/hooks'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import Pagination from '@/Components/Pagination'
+import Pagination from '@/Components/DaisyUI/Pagination'
 import ModalConfirm from '@/Components/DaisyUI/ModalConfirm'
 import SearchInput from '@/Components/DaisyUI/SearchInput'
 import HasPermission from '@/Components/Common/HasPermission'
@@ -72,61 +72,58 @@ export default function Index(props) {
                                 />
                             </div>
                         </div>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th />
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {data.map(({{ model }}, index) => (
-                                    <tr key={{{ model }}.id}>
-                                        <td>{{{ model }}.name}</td>
-                                        <td className="text-right">
-                                            <Dropdown
-                                                label={'Opsi'}
-                                                last={
-                                                    index + 1 === +data.length
-                                                }
-                                            >
-                                                <HasPermission p="update-{{ model }}">
-                                                    <Dropdown.Item
-                                                        onClick={() =>
-                                                            router.visit(
-                                                                route(
-                                                                    '{{ models }}.edit',
+                        <div className="overflow-x-auto">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th />
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data.map(({{ model }}, index) => (
+                                        <tr key={{{ model }}.id}>
+                                            <td>{{{ model }}.name}</td>
+                                            <td className="text-right">
+                                                <Dropdown label={'Opsi'}>
+                                                    <HasPermission p="update-{{ model }}">
+                                                        <Dropdown.Item
+                                                            onClick={() =>
+                                                                router.visit(
+                                                                    route(
+                                                                        '{{ models }}.edit',
+                                                                        {{ model }}
+                                                                    )
+                                                                )
+                                                            }
+                                                        >
+                                                            <div className="flex space-x-1 items-center">
+                                                                <HiPencil />
+                                                                <div>Ubah</div>
+                                                            </div>
+                                                        </Dropdown.Item>
+                                                    </HasPermission>
+                                                    <HasPermission p="delete-{{ model }}">
+                                                        <Dropdown.Item
+                                                            onClick={() =>
+                                                                handleDeleteClick(
                                                                     {{ model }}
                                                                 )
-                                                            )
-                                                        }
-                                                    >
-                                                        <div className="flex space-x-1 items-center">
-                                                            <HiPencil />
-                                                            <div>Ubah</div>
-                                                        </div>
-                                                    </Dropdown.Item>
-                                                </HasPermission>
-                                                <HasPermission p="delete-{{ model }}">
-                                                    <Dropdown.Item
-                                                        onClick={() =>
-                                                            handleDeleteClick(
-                                                                {{ model }}
-                                                            )
-                                                        }
-                                                    >
-                                                        <div className="flex space-x-1 items-center">
-                                                            <HiTrash />
-                                                            <div>Hapus</div>
-                                                        </div>
-                                                    </Dropdown.Item>
-                                                </HasPermission>
-                                            </Dropdown>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                                            }
+                                                        >
+                                                            <div className="flex space-x-1 items-center">
+                                                                <HiTrash />
+                                                                <div>Hapus</div>
+                                                            </div>
+                                                        </Dropdown.Item>
+                                                    </HasPermission>
+                                                </Dropdown>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                         <div className="w-full overflow-x-auto flex lg:justify-center">
                             <Pagination links={links} params={params} />
                         </div>

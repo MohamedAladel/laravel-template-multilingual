@@ -117,7 +117,7 @@ export default function FormFile({
                 {error && (
                     <div className="label">
                         <span className="label-text-alt text-red-600">
-                            {help}
+                            {error}
                         </span>
                     </div>
                 )}

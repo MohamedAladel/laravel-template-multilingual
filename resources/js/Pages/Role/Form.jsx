@@ -111,61 +111,57 @@ export default function Role(props) {
             <Head title="Role" />
 
             <div>
-                <div className="mx-auto sm:px-6 lg:px-8 ">
-                    <Card>
-                        <div className="flex flex-col gap-2 justify-between">
-                            <TextInput
-                                name="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                label="Name"
-                                error={errors.name}
-                            />
-                            <Checkbox
-                                label={'Check All'}
-                                onChange={handleCheckAll}
-                            />
-                            <div
-                                className={`grid grid-cols-1 md:grid-cols-4 border border-rounded border-gray-400 rounded-lg p-2 gap-2 ${
-                                    errors.permissions
-                                        ? 'border-red-600'
-                                        : 'border-gray-400'
-                                }`}
-                            >
-                                {permins.map((item) => (
-                                    <Checkbox
-                                        key={item.id}
-                                        label={item.label}
-                                        value={item.checked}
-                                        name={item.name}
-                                        onChange={handleCheckPermission}
-                                    />
-                                ))}
-                            </div>
-                            {errors.permissions && (
-                                <p className="mb-2 text-sm text-red-600 dark:text-red-500">
-                                    {errors.permissions}
-                                </p>
-                            )}
-                            <div className="flex items-center">
-                                <div className="flex space-x-2">
-                                    <Button
-                                        onClick={handleSubmit}
-                                        processing={processing}
-                                        type="primary"
-                                    >
-                                        Simpan
-                                    </Button>
-                                    <Link href={route('roles.index')}>
-                                        <Button type="secondary">
-                                            Kembali
-                                        </Button>
-                                    </Link>
-                                </div>
+                <Card>
+                    <div className="flex flex-col gap-2 justify-between">
+                        <TextInput
+                            name="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            label="Name"
+                            error={errors.name}
+                        />
+                        <Checkbox
+                            label={'Check All'}
+                            onChange={handleCheckAll}
+                        />
+                        <div
+                            className={`grid grid-cols-1 md:grid-cols-4 border border-rounded border-gray-400 rounded-lg p-2 gap-2 ${
+                                errors.permissions
+                                    ? 'border-red-600'
+                                    : 'border-gray-400'
+                            }`}
+                        >
+                            {permins.map((item) => (
+                                <Checkbox
+                                    key={item.id}
+                                    label={item.label}
+                                    value={item.checked}
+                                    name={item.name}
+                                    onChange={handleCheckPermission}
+                                />
+                            ))}
+                        </div>
+                        {errors.permissions && (
+                            <p className="mb-2 text-sm text-red-600 dark:text-red-500">
+                                {errors.permissions}
+                            </p>
+                        )}
+                        <div className="flex items-center">
+                            <div className="flex space-x-2">
+                                <Button
+                                    onClick={handleSubmit}
+                                    processing={processing}
+                                    type="primary"
+                                >
+                                    Simpan
+                                </Button>
+                                <Link href={route('roles.index')}>
+                                    <Button type="secondary">Kembali</Button>
+                                </Link>
                             </div>
                         </div>
-                    </Card>
-                </div>
+                    </div>
+                </Card>
             </div>
         </AuthenticatedLayout>
     )

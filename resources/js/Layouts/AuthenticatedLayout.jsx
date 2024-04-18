@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { router, usePage } from '@inertiajs/react'
+import { Link, router, usePage } from '@inertiajs/react'
 import { Toaster } from 'sonner'
 import { isArray, isEmpty } from 'lodash'
 import { themeChange } from 'theme-change'
 import { HiMenu } from 'react-icons/hi'
 
-import Dropdown from '@/Components/Defaults/Dropdown'
 import SidebarNav from './Partials/SidebarNav'
 import Breadcrumb from '@/Components/DaisyUI/Breadcrumb'
 import ThemeSwitch from '@/Components/DaisyUI/ThemeSwitch'
@@ -31,24 +30,23 @@ export default function Authenticated({ children, page = '', action = '' }) {
 
     return (
         <div className="min-h-screen">
-            <SidebarNav user={auth.user} show={showingNavigationDropdown} />
+            <SidebarNav
+                user={auth.user}
+                show={showingNavigationDropdown}
+                setShow={setShowingNavigationDropdown}
+            />
             <main className="ml-0 transition md:ml-64">
                 <nav className="">
-                    <div className="mx-auto px-4 sm:px-6 lg:px-8 py-2">
+                    <div className="mx-auto px-4 py-2">
                         <div className="flex justify-between sm:justify-end">
-                            <div
-                                className="-mr-2 flex items-center sm:hidden space-x-2"
-                                data-hs-overlay="#docs-sidebar"
-                                aria-controls="docs-sidebar"
-                                aria-label="Toggle navigation"
-                            >
+                            <div className="-mr-2 flex items-center sm:hidden space-x-2">
                                 <button
                                     onClick={() =>
                                         setShowingNavigationDropdown(
                                             (previousState) => !previousState
                                         )
                                     }
-                                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                    className="inline-flex items-center justify-center p-2 rounded-md text-base-content focus:outline-none  transition duration-150 ease-in-out"
                                 >
                                     <HiMenu />
                                 </button>
@@ -59,8 +57,8 @@ export default function Authenticated({ children, page = '', action = '' }) {
                                     <ThemeSwitch />
                                 </div>
                                 <div className="ml-3 relative">
-                                    <Dropdown>
-                                        <Dropdown.Trigger>
+                                    <details className="dropdown dropdown-end">
+                                        <summary className="btn btn-ghost btn-circle">
                                             <span className="inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-500 text-sm font-semibold text-white leading-none">
                                                 {auth.user.name
                                                     .split(' ')
@@ -68,23 +66,28 @@ export default function Authenticated({ children, page = '', action = '' }) {
                                                     .join('')
                                                     .toUpperCase()}
                                             </span>
-                                        </Dropdown.Trigger>
+                                        </summary>
 
-                                        <Dropdown.Content>
-                                            <Dropdown.Link
-                                                href={route('profile.edit')}
-                                            >
-                                                Profile
-                                            </Dropdown.Link>
-                                            <Dropdown.Link
-                                                href={route('logout')}
-                                                method="post"
-                                                as="button"
-                                            >
-                                                Log Out
-                                            </Dropdown.Link>
-                                        </Dropdown.Content>
-                                    </Dropdown>
+                                        <ul className="mt-2 p-2 shadow-xl menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                                            <li>
+                                                <Link
+                                                    href={route('profile.edit')}
+                                                    as="button"
+                                                >
+                                                    Profile
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    href={route('logout')}
+                                                    method="post"
+                                                    as="button"
+                                                >
+                                                    Logout
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </details>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +115,8 @@ export default function Authenticated({ children, page = '', action = '' }) {
                         )}
                     </Breadcrumb>
                 )}
-                <div className="py-4">{children}</div>
+                <div className="p-4">{children}</div>
+                <div className="mb-4"></div>
             </main>
             <Toaster
                 theme="system"

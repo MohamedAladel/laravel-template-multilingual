@@ -11,8 +11,8 @@ export default function Edit({ mustVerifyEmail, status }) {
         <AuthenticatedLayout page={'System'} action={'Profile'}>
             <Head title="Profile" />
 
-            <div className="pb-12 pt-2">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div>
+                <div className="mx-auto space-y-6">
                     <Card>
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}

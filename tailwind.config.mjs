@@ -7,6 +7,7 @@ module.exports = {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
+        './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
     ],
 
     theme: {

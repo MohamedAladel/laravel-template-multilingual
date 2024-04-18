@@ -6,7 +6,7 @@ import { HiPencil, HiTrash } from 'react-icons/hi'
 import { useModalState } from '@/hooks'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import Pagination from '@/Components/Pagination'
+import Pagination from '@/Components/DaisyUI/Pagination'
 import ModalConfirm from '@/Components/DaisyUI/ModalConfirm'
 import SearchInput from '@/Components/DaisyUI/SearchInput'
 import HasPermission from '@/Components/Common/HasPermission'
@@ -54,24 +54,24 @@ export default function Index(props) {
             <Head title="Role" />
 
             <div>
-                <div className="mx-auto sm:px-6 lg:px-8">
-                    <Card>
-                        <div className="flex justify-between">
-                            <HasPermission p="create-role">
-                                <Link href={route('roles.create')}>
-                                    <Button size="sm" type="primary">
-                                        Tambah
-                                    </Button>
-                                </Link>
-                            </HasPermission>
+                <Card>
+                    <div className="flex justify-between">
+                        <HasPermission p="create-role">
+                            <Link href={route('roles.create')}>
+                                <Button size="sm" type="primary">
+                                    Tambah
+                                </Button>
+                            </Link>
+                        </HasPermission>
 
-                            <div className="flex items-center">
-                                <SearchInput
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    value={search}
-                                />
-                            </div>
+                        <div className="flex items-center">
+                            <SearchInput
+                                onChange={(e) => setSearch(e.target.value)}
+                                value={search}
+                            />
                         </div>
+                    </div>
+                    <div className="overflow-x-auto">
                         <table className="table">
                             <thead>
                                 <tr>
@@ -80,16 +80,11 @@ export default function Index(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data.map((role, index) => (
+                                {data.map((role) => (
                                     <tr key={role.id}>
                                         <td>{role.name}</td>
                                         <td className="text-right">
-                                            <Dropdown
-                                                label={'Opsi'}
-                                                last={
-                                                    index + 1 === +data.length
-                                                }
-                                            >
+                                            <Dropdown label={'Opsi'}>
                                                 <HasPermission p="update-role">
                                                     <Dropdown.Item
                                                         onClick={() =>
@@ -127,11 +122,11 @@ export default function Index(props) {
                                 ))}
                             </tbody>
                         </table>
-                        <div className="w-full overflow-x-auto flex lg:justify-center">
-                            <Pagination links={links} params={params} />
-                        </div>
-                    </Card>
-                </div>
+                    </div>
+                    <div className="w-full overflow-x-auto flex lg:justify-center">
+                        <Pagination links={links} params={params} />
+                    </div>
+                </Card>
             </div>
             <ModalConfirm modalState={confirmModal} onConfirm={onDelete} />
         </AuthenticatedLayout>

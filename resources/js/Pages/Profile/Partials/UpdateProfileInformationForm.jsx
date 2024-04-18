@@ -85,7 +85,11 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <Button onClick={submit} processing={processing}>
+                    <Button
+                        onClick={submit}
+                        processing={processing}
+                        type="primary"
+                    >
                         Save
                     </Button>
                 </div>

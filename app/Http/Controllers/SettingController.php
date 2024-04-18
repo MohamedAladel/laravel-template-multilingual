@@ -25,6 +25,9 @@ class SettingController extends Controller
         DB::beginTransaction();
 
         foreach ($request->input() as $key => $value) {
+            if ($value === null) {
+                continue;
+            }
             Setting::updateOrCreate(
                 ['key' => $key],
                 [

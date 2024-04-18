@@ -25,7 +25,7 @@ export default function Setting(props) {
     const app_logo_url = extractValue(setting, 'app_logo')
     const { data, setData, post, processing, errors } = useForm({
         app_name: extractValue(setting, 'app_name'),
-        app_logo: null,
+        app_logo: '',
     })
 
     const handleOnChange = (event) => {
@@ -48,38 +48,34 @@ export default function Setting(props) {
             <Head title="Setting" />
 
             <div>
-                <div className="mx-auto sm:px-6 lg:px-8 overflow-hidden">
-                    <Card>
-                        <div className="text-xl font-bold mb-4 text-base-content">
-                            Setting
-                        </div>
-                        <TextInput
-                            name="app_name"
-                            value={data.app_name}
-                            onChange={handleOnChange}
-                            label="App Name"
-                            error={errors.app_name}
-                        />
-                        <FormFile
-                            label={'App Logo'}
-                            onChange={(file_path) =>
-                                setData('app_logo', file_path)
-                            }
-                            error={errors.app_logo}
-                            url={app_logo_url}
-                            filemimes="image/jpg,image/jpeg,image/png"
-                        />
-                        <div className="mt-4">
-                            <Button
-                                onClick={handleSubmit}
-                                processing={processing}
-                                type="primary"
-                            >
-                                Simpan
-                            </Button>
-                        </div>
-                    </Card>
-                </div>
+                <Card>
+                    <div className="text-xl font-bold mb-4 text-base-content">
+                        Setting
+                    </div>
+                    <TextInput
+                        name="app_name"
+                        value={data.app_name}
+                        onChange={handleOnChange}
+                        label="App Name"
+                        error={errors.app_name}
+                    />
+                    <FormFile
+                        label={'App Logo'}
+                        onChange={(file_path) => setData('app_logo', file_path)}
+                        error={errors.app_logo}
+                        url={app_logo_url}
+                        filemimes="image/jpg,image/jpeg,image/png"
+                    />
+                    <div className="mt-4">
+                        <Button
+                            onClick={handleSubmit}
+                            processing={processing}
+                            type="primary"
+                        >
+                            Simpan
+                        </Button>
+                    </div>
+                </Card>
             </div>
         </AuthenticatedLayout>
     )

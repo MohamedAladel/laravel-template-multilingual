@@ -3,14 +3,7 @@ import React from 'react'
 const BottomTextHelper = ({ error }) => {
     if (!error) return null
 
-    return (
-        <p
-            className="text-sm text-red-600 mt-2"
-            id="hs-validation-name-error-helper"
-        >
-            {error}
-        </p>
-    )
+    return <p className="text-sm text-red-600 mt-2">{error}</p>
 }
 
 export default function Checkbox(props) {

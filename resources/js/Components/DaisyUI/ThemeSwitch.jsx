@@ -1,9 +1,9 @@
 export default function ThemeSwitch() {
-    const themes = ['default', 'light', 'cupcake', 'corporate', 'lofi']
+    const themes = ['business', 'dark', 'light', 'cupcake', 'corporate', 'lofi']
 
     return (
         <div>
-            <div className="dropdown dropdown-left">
+            <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn m-1">
                     Theme
                     <svg
@@ -18,7 +18,7 @@ export default function ThemeSwitch() {
                 </div>
                 <ul
                     tabIndex={0}
-                    className="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52"
+                    className="dropdown-content z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52"
                 >
                     {themes.map((t, i) => (
                         <li key={i}>
