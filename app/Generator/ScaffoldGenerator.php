@@ -8,19 +8,48 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+use function React\Async\async;
+
 class ScaffoldGenerator
 {
-    private string $model;
+    public const RESERVED_KEYWORDS = [
+        '__halt_compiler', 'abstract', 'and', 'array', 'as', 'break',
+        'callable', 'case', 'catch', 'class', 'clone', 'const',
+        'continue', 'declare', 'default', 'die', 'do', 'echo',
+        'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach',
+        'endif', 'endswitch', 'endwhile', 'eval', 'exit', 'extends',
+        'final', 'finally', 'for', 'foreach', 'function', 'global',
+        'goto', 'if', 'implements', 'include', 'include_once', 'instanceof',
+        'insteadof', 'interface', 'isset', 'list', 'namespace', 'new',
+        'null', 'or', 'print', 'private', 'protected', 'public',
+        'require', 'require_once', 'return', 'static', 'switch', 'throw',
+        'trait', 'try', 'unset', 'use', 'var', 'while',
+        'with', 'xor', 'yield', 'yield_from',
+        // JavaScript reserved keywords
+        'arguments', 'await', 'boolean', 'break', 'byte',
+        'case', 'catch', 'char', 'class', 'const', 'continue',
+        'debugger', 'default', 'delete', 'do', 'double', 'else',
+        'enum', 'eval', 'export', 'extends', 'false', 'final',
+        'finally', 'float', 'for', 'function', 'goto', 'if',
+        'implements', 'import', 'in', 'instanceof', 'int', 'interface',
+        'let', 'long', 'native', 'new', 'null', 'package',
+        'private', 'protected', 'public', 'return', 'short', 'static',
+        'super', 'switch', 'synchronized', 'this', 'throw', 'throws',
+        'transient', 'true', 'try', 'typeof', 'var', 'void',
+        'volatile', 'while', 'with', 'yield',
+    ];
 
-    private string $models;
+    public string $model;
 
-    private string $Model;
+    public string $models;
 
-    private bool $adminAccess = false;
+    public string $Model;
 
-    private array $defaultDestinations;
+    public bool $adminAccess = false;
 
-    private array $fields; //not yet used
+    public array $defaultDestinations;
+
+    public array $fields; //not yet used
 
     public function __construct(
         string $model,
@@ -37,12 +66,35 @@ class ScaffoldGenerator
 
         $this->defaultDestinations = [
             'files' => [app_path('Http/Controllers/').$this->Model.'Controller.php'],
-            'dirs' => [resource_path('js/Pages/').$this->models],
+            'dirs' => [resource_path('js/Pages/').$this->Model],
         ];
+    }
 
-        if ($this->createModelClass) {
-            Artisan::call('make:model '.$this->Model.' -m');
+    public function isModelKeywordAllowed()
+    {
+        return in_array($this->model, self::RESERVED_KEYWORDS);
+    }
+
+    public function isModelExists()
+    {
+        return File::exists(app_path('Models/'.$this->Model.'.php'));
+    }
+
+    public function withProtectedAdminAccess($adminAccess)
+    {
+        $this->adminAccess = $adminAccess;
+
+        return $this;
+    }
+
+    public function withCreateModelClass($createModelClass)
+    {
+        $this->createModelClass = $createModelClass;
+        if ($createModelClass) {
+            async(fn () => Artisan::call('make:model '.$this->Model.' -m'));
         }
+
+        return $this;
     }
 
     public function ScaffoldModal()
@@ -55,7 +107,7 @@ class ScaffoldGenerator
 
         try {
             // File: ModelController.php, Index.jsx, FormModal.jsx
-            FileGenerator::new()->ScaffoldModal($this->model, $replaces);
+            FileGenerator::new($this->Model, $replaces)->ScaffoldModal();
 
             // Web Router
             $positionName = $this->adminAccess ? '// #Admin' : null;
@@ -90,7 +142,7 @@ class ScaffoldGenerator
 
         try {
             // File: ModelController.php, Index.jsx, Form.jsx
-            FileGenerator::new()->ScaffoldPage($this->model, $replaces);
+            FileGenerator::new($this->Model, $replaces)->ScaffoldPage();
 
             // Web Router
             $positionName = $this->adminAccess ? '// #Admin' : null;
@@ -120,7 +172,7 @@ class ScaffoldGenerator
 
         try {
             // File: ModelController.php, Index.jsx
-            FileGenerator::new()->ScaffoldSinglePage($this->model, $replaces);
+            FileGenerator::new($this->Model, $replaces)->ScaffoldSinglePage();
 
             // Web Router
             $positionName = $this->adminAccess ? '// #Admin' : null;
@@ -151,6 +203,9 @@ class ScaffoldGenerator
         }
         foreach ($this->defaultDestinations['files'] as $d) {
             File::delete($d);
+        }
+        if ($this->createModelClass) {
+            File::delete(app_path('Models/'.$this->Model.'.php'));
         }
     }
 

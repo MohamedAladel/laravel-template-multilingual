@@ -5,7 +5,6 @@ namespace App\Generator\Commands;
 use App\Generator\ScaffoldGenerator;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
-use Illuminate\Support\Facades\File;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\select;
@@ -53,21 +52,31 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
      */
     public function handle()
     {
-        $model = $this->argument('model');
+        $model = str($this->argument('model'))->trim()->lower();
 
-        $createModelClass = false;
-        if (!File::exists(app_path('Models/' . $model . '.php'))) {
-            $createModelClass = confirm("App\Models\\" . $model . ' does not exist, create it ?');
+        $scaffold = new ScaffoldGenerator($model);
+
+        if ($scaffold->isModelKeywordAllowed()) {
+            $this->error('Error: model name can not in reserved keywords');
+
+            return 0;
         }
+
+        if (! $scaffold->isModelExists()) {
+            $scaffold->withCreateModelClass(
+                confirm("App\Models\\".$scaffold->Model.' does not exist, create it ?')
+            );
+        }
+
+        $scaffold->withProtectedAdminAccess(
+            confirm('Only admin allowed ?')
+        );
 
         $type = select(
             label: 'Which type to generate ?',
             options: ['Scaffold Modal', 'Scaffold Page', 'Single Page'],
             default: 'Scaffold Modal',
         );
-        $adminOnly = confirm('Only admin allowed ?');
-
-        $scaffold = new ScaffoldGenerator($model, $adminOnly, createModelClass: $createModelClass);
 
         $result = match ($type) {
             'Scaffold Modal' => $scaffold->ScaffoldModal(),

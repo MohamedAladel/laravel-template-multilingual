@@ -40,4 +40,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // #Guest
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
