@@ -1,6 +1,6 @@
 ## TODO
 
--   [ ] ?
+-   [ ] upgrade files controller to add models as madia manager
 
 ## NICE TO CREATE
 
