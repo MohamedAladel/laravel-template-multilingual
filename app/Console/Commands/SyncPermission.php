@@ -19,14 +19,14 @@ class SyncPermission extends Command
      *
      * @var string
      */
-    protected $description = 'sync any new create permission and attach to `admin` role ';
+    protected $description = 'Sync any changes LIST PermissionConst and attach to `admin` role is exists';
 
     /**
      * Configure the command.
      */
     protected function configure()
     {
-        $this->setAliases(['sync-permission', 'syncp', 'sp', 'permission-sync', 'permsync']);
+        $this->setAliases(['sync-permission', 'syncp', 'sp']);
 
         parent::configure();
     }

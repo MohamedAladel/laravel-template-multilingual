@@ -16,7 +16,7 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
      *
      * @var string
      */
-    protected $signature = 'scaffold {model}';
+    protected $signature = 'app:scaffold {model}';
 
     /**
      * The console command description.
@@ -30,7 +30,7 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
      */
     protected function configure()
     {
-        $this->setAliases(['sc', 'scaf', 'gen']);
+        $this->setAliases(['scaffold', 'gen', 'sc']);
 
         parent::configure();
     }
@@ -62,10 +62,10 @@ class ScaffoldCommand extends Command implements PromptsForMissingInput
             return 0;
         }
 
-        if (!$scaffold->isModelExists()) {
+        if (! $scaffold->isModelExists()) {
             $_ = $scaffold->withCreateModelClass(
                 $this,
-                $_ = confirm("App\Models\\" . $scaffold->Model . ' does not exist, create it ?')
+                $_ = confirm("App\Models\\".$scaffold->Model.' does not exist, create it ?')
             );
         }
 

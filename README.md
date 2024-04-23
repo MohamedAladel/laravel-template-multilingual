@@ -57,6 +57,12 @@ password : password
 npm run build
 ```
 
+## Compress applications to deploy on web hosting ( to prod )
+
+```bash
+php artisan build
+```
+
 ## Screen Capture
 
 ![](screenshot_v3.gif?raw=true)
