@@ -51,17 +51,23 @@ username : admin@admin.com
 password : password
 ```
 
-## Compile Assets ( to prod )
+## Deploy ( go to production )
+
+### method 1 - compile assets
 
 ```bash
 npm run build
 ```
 
-## Compress applications to deploy on web hosting ( to prod )
+after build the assets you can manually compress you application to deploy on web hosting / vps
+
+### method 2 - compress asset to ready upload
 
 ```bash
 php artisan build
 ```
+
+this command will generate `app_name.zip` in your root folder and its file ready with build assets and optimize files
 
 ## Screen Capture
 
