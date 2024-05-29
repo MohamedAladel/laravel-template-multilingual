@@ -1,6 +1,5 @@
 ## TODO
 
--   [ ] scafold masih bermasalah dengan model yang lebih dari 1 kata
 -   [ ] upgrade files controller to add models as madia manager
 -   [ ] has nice select component with fetch table api, want to create this as modal table with fetch table api
 

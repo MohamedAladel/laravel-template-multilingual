@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Default;
 
 use App\Http\Controllers\Controller;
+use App\Models\Default\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\File;
+use Illuminate\Validation\Rules\File as FileRule;
 
 class FileController extends Controller
 {
@@ -23,7 +24,7 @@ class FileController extends Controller
     {
         $rule = ['required', 'file'];
         if ($request->filemimes != '') {
-            $rule[] = File::types($request->filemimes);
+            $rule[] = FileRule::types($request->filemimes);
         }
 
         $request->validate([
@@ -33,6 +34,13 @@ class FileController extends Controller
         $file = $request->file('file');
 
         Storage::disk('local')->put('public', $file);
+
+        File::create([
+            'upload_name' => $file->getClientOriginalName(),
+            'hash_name' => $file->hashName(),
+            'name' => $file->getClientOriginalName(),
+            'type' => File::FILE,
+        ]);
 
         return response()->json([
             'id' => Str::ulid(),
