@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Default;
 
 use App\Models\Traits\UserTrackable;
 use Dyrynda\Database\Support\CascadeSoftDeletes;

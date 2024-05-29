@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Constants\PermissionConst;
-use App\Models\Permission;
-use App\Models\Role;
+use App\Constants\PermissionConstant;
+use App\Models\Default\Permission;
+use App\Models\Default\Role;
 use Illuminate\Support\Str;
 
 class PermissionServices
@@ -16,7 +16,7 @@ class PermissionServices
 
     public function sync()
     {
-        $lists = collect(PermissionConst::LIST)->map(fn ($permission) => $permission['name'])->toArray();
+        $lists = collect(PermissionConstant::LIST)->map(fn ($permission) => $permission['name'])->toArray();
         $permissions = Permission::all()->pluck('name')->toArray();
 
         // remove existing permission in database
@@ -29,7 +29,7 @@ class PermissionServices
         // add new permission to database
         $to_add = array_diff($lists, $permissions);
         foreach ($to_add as $index => $name) {
-            $np = Permission::create(['id' => Str::ulid(), ...PermissionConst::LIST[$index]]);
+            $np = Permission::create(['id' => Str::ulid(), ...PermissionConstant::LIST[$index]]);
             if ($adminRole != null) {
                 $adminRole->rolePermissions()->create(['permission_id' => $np->id]);
             }

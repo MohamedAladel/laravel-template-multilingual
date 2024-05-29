@@ -2,23 +2,29 @@
 
 namespace Database\Seeders;
 
-use App\Constants\PermissionConst;
-use App\Models\Permission;
-use App\Models\Role;
-use App\Models\User;
+use App\Constants\PermissionConstant;
+use App\Models\Default\Permission;
+use App\Models\Default\Role;
+use App\Models\Default\Setting;
+use App\Models\Default\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class PermissionSeeder extends Seeder
+class DefaultSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        foreach (PermissionConst::LIST as $permission) {
+        $settings = [
+            ['id' => Str::ulid(), 'key' => 'app_name', 'value' => 'Daisy UI App', 'type' => 'text'],
+            ['id' => Str::ulid(), 'key' => 'app_logo', 'value' => '', 'type' => 'image'],
+        ];
+
+        Setting::insert($settings);
+
+        foreach (PermissionConstant::LIST as $permission) {
             Permission::insert(['id' => Str::ulid(), ...$permission]);
         }
 

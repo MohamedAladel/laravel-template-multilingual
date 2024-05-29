@@ -1,9 +1,8 @@
 ## TODO
 
--   [ ] compress app masih belum work 100% -> suggest compres all except node_modules baru harus path file
--   [ ] page form space form masih salah
 -   [ ] scafold masih bermasalah dengan model yang lebih dari 1 kata
 -   [ ] upgrade files controller to add models as madia manager
+-   [ ] has nice select component with fetch table api, want to create this as modal table with fetch table api
 
 ## NICE TO CREATE
 

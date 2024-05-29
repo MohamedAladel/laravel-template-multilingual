@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Default\User;
 
 test('login screen can be rendered', function () {
     $response = $this->withHeaders(['Accept' => 'application/json'])->get('/login');

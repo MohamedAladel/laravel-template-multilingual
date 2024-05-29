@@ -64,35 +64,33 @@ export default function Form(props) {
             <Head title="{{ Model }}" />
 
             <div>
-                <div className="mx-auto sm:px-6 lg:px-8 ">
-                    <Card>
-                        <div className="flex flex-col gap-2 justify-between">
-                            <TextInput
-                                name="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                label="Name"
-                                error={errors.name}
-                            />
-                            <div className="flex items-center">
-                                <div className="flex space-x-2">
-                                    <Button
-                                        onClick={handleSubmit}
-                                        processing={processing}
-                                        type="primary"
-                                    >
-                                        Simpan
+                <Card>
+                    <div className="flex flex-col gap-2 justify-between">
+                        <TextInput
+                            name="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            label="Name"
+                            error={errors.name}
+                        />
+                        <div className="flex items-center">
+                            <div className="flex space-x-2">
+                                <Button
+                                    onClick={handleSubmit}
+                                    processing={processing}
+                                    type="primary"
+                                >
+                                    Simpan
+                                </Button>
+                                <Link href={route('{{ models }}.index')}>
+                                    <Button type="secondary">
+                                        Kembali
                                     </Button>
-                                    <Link href={route('{{ models }}.index')}>
-                                        <Button type="secondary">
-                                            Kembali
-                                        </Button>
-                                    </Link>
-                                </div>
+                                </Link>
                             </div>
                         </div>
-                    </Card>
-                </div>
+                    </div>
+                </Card>
             </div>
         </AuthenticatedLayout>
     )

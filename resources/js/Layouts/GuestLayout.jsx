@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import ApplicationLogo from '@/Components/Defaults/ApplicationLogo'
+import ApplicationLogo from '@/Components/ApplicationLogo'
 import { Link } from '@inertiajs/react'
 import { themeChange } from 'theme-change'
 

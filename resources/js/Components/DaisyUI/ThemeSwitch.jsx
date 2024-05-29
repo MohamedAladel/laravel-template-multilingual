@@ -1,5 +1,13 @@
 export default function ThemeSwitch() {
-    const themes = ['business', 'dark', 'light', 'cupcake', 'corporate', 'lofi']
+    const themes = [
+        'winter',
+        'business',
+        'dark',
+        'light',
+        'cupcake',
+        'corporate',
+        'lofi',
+    ]
 
     return (
         <div>

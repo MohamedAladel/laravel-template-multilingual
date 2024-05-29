@@ -78,7 +78,7 @@ export default function Register() {
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        handleChange={onHandleChange}
+                        onChange={onHandleChange}
                         error={errors.password_confirmation}
                     />
                 </div>

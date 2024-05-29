@@ -2,7 +2,7 @@
 
 namespace App\Constants;
 
-class PermissionConst
+class PermissionConstant
 {
     const LIST = [
         ['label' => 'View Dashboard', 'name' => 'view-dashboard'],

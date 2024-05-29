@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Services\ZipServices;
+use Exception;
 use Illuminate\Console\Command;
 use RuntimeException;
 use Symfony\Component\Process\Process;
@@ -40,7 +41,7 @@ class BuildArchiveCommand extends Command
      */
     public function handle()
     {
-        $zipName = basename(base_path()).'.zip';
+        $zipName = str_replace(' ', '', basename(base_path())) . '_' . now()->format('dm_His') . '.zip';
         if ($this->option('remove') != 'n') {
             try {
                 unlink(base_path($zipName));
@@ -62,18 +63,22 @@ class BuildArchiveCommand extends Command
         $r = new ZipServices;
 
         $withRawJs = confirm('Includes resources/js ?', false);
-        if (! $withRawJs) {
-            $r->addExcludedPath('resources/js');
+        if (!$withRawJs) {
+            $r->addExcludedContains('resources/js');
         }
 
-        $r->create(base_path(), $zipName);
+        try {
+            $startTime = microtime(true);
 
-        if ($r) {
-            $this->info('Successfuly create compressed zip file');
+            $r->create(base_path(), $zipName);
 
-            return;
+            $endTime = microtime(true);
+            $timeTaken = number_format($endTime - $startTime, 2);
+
+            $this->info("Successfuly create compressed zip file: $timeTaken second");
+        } catch (Exception $e) {
+            $this->error('Error : ' . $e->getMessage());
         }
-        $this->error('Error');
     }
 
     /**
@@ -90,12 +95,12 @@ class BuildArchiveCommand extends Command
             try {
                 $process->setTty(true);
             } catch (RuntimeException $e) {
-                $this->output->writeln('  <bg=yellow;fg=black> WARN </> '.$e->getMessage().PHP_EOL);
+                $this->output->writeln('  <bg=yellow;fg=black> WARN </> ' . $e->getMessage() . PHP_EOL);
             }
         }
 
         $process->run(function ($type, $line) {
-            $this->output->write('    '.$line);
+            $this->output->write('    ' . $line);
         });
     }
 }

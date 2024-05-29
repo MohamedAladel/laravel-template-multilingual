@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Setting;
+use App\Models\Default\Setting;
 use App\Services\UserJwtServices;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -14,7 +14,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @var string
      */
-    protected $rootView = 'app';
+    protected $rootView = 'admin';
 
     /**
      * Determine the current asset version.
@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'message' => fn () => $request->session()->get('message'),
             ],
-            'app_name' => Setting::getByKey('app_name'),
+            'app' => Setting::getByKeys(['app_name', 'app_logo'])
         ]);
     }
 }

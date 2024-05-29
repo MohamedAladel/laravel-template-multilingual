@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Default;
 
 class Role extends Model
 {

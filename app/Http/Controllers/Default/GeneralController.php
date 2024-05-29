@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Default;
 
-use App\Models\Role;
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\Default\Role;
+use App\Models\Default\User;
 
 class GeneralController extends Controller
 {

@@ -1,16 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Default;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\File;
 
-class UploadController extends Controller
+class FileController extends Controller
 {
     public function show(string $name)
     {
+        if (Storage::disk('local')->exists('default/' . $name)) {
+            return Storage::disk('local')->get('default/' . $name);
+        }
+
         return Storage::disk('local')->get('public/' . $name);
     }
 

@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash'
 import Modal from '@/Components/DaisyUI/Modal'
 import Button from '@/Components/DaisyUI/Button'
 import TextInput from '@/Components/DaisyUI/TextInput'
-import RoleSelectionInput from '@/Components/Common/SelectionInput'
+import RoleSelectionInput from '@/Components/DaisyUI/SelectionInput'
 
 export default function FormModal(props) {
     const { modalState } = props

@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\GeneralController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UploadController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Default\GeneralController;
+use App\Http\Controllers\Default\ProfileController;
+use App\Http\Controllers\Default\RoleController;
+use App\Http\Controllers\Default\SettingController;
+use App\Http\Controllers\Default\FileController;
+use App\Http\Controllers\Default\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('files/{file}', [UploadController::class, 'show'])->name('file.show');
+Route::get('files/{file}', [FileController::class, 'show'])->name('file.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [GeneralController::class, 'index'])->name('dashboard');
@@ -40,4 +40,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // #Guest
-require __DIR__.'/auth.php';

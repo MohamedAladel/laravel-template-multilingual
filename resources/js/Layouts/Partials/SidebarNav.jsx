@@ -3,7 +3,6 @@ import { Link, router, usePage } from '@inertiajs/react'
 import { HiLogout, HiOutlineX } from 'react-icons/hi'
 import { filterAllowedMenu } from './helpers.cjs'
 import routes from './routes.cjs'
-import { isEmpty } from 'lodash'
 
 const SidebarItem = ({ item }) => {
     return (
@@ -53,7 +52,9 @@ const SidebarItemGroup = ({ item }) => {
 
 export default function SidebarNav({ user, show, setShow }) {
     const {
-        props: { app_name },
+        props: {
+            app: { app_name },
+        },
     } = usePage()
     const menus = routes.filter((item) => {
         item.open = false

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Default;
 
-use App\Models\Setting;
+use App\Http\Controllers\Controller;
+use App\Models\Default\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

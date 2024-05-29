@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Default;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -22,9 +22,20 @@ class Setting extends Model
         'url',
     ];
 
-    public static function getByKey($key): ?string
+    public static function getByKey(string $key): ?string
     {
         return Setting::where('key', $key)->value('value');
+    }
+
+    public static function getByKeys(array $keys)
+    {
+        $value = [];
+        Setting::whereIn('key', $keys)->orderBy('key', 'desc')->get()
+            ->map(function ($item) use (&$value) {
+                $value[$item->key] = $item->value;
+            });
+
+        return $value;
     }
 
     public function url(): Attribute

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Default;
 
-use App\Models\Permission;
-use App\Models\Role;
-use App\Models\RolePermission;
+use App\Http\Controllers\Controller;
+use App\Models\Default\Permission;
+use App\Models\Default\Role;
+use App\Models\Default\RolePermission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

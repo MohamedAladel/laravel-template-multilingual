@@ -21,6 +21,7 @@ export default function FormFile({
     const [name, setName] = useState('File')
     const [link, setLink] = useState(url)
     const [loading, setLoading] = useState(false)
+    const [percent, setPercent] = useState(0)
 
     const handleClick = () => {
         inputRef.current.click()
@@ -43,6 +44,13 @@ export default function FormFile({
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: auth.jwt_prefix + auth.jwt_token,
+                },
+                onUploadProgress: function (progressEvent) {
+                    setPercent(
+                        Math.round(
+                            (progressEvent.loaded * 100) / progressEvent.total
+                        )
+                    )
                 },
             })
             .then((response) => {
@@ -71,7 +79,7 @@ export default function FormFile({
                     <div className="file-input input-bordered">
                         <div className="flex flex-row space-x-2 items-center h-full pl-2">
                             <Spinner />
-                            <div>Uploading...</div>
+                            <div>{percent} Uploading...</div>
                         </div>
                     </div>
                 ) : (
