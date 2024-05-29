@@ -4,7 +4,6 @@ namespace App\Generator;
 
 use App\Services\PermissionServices;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ScaffoldGenerator
@@ -54,8 +53,8 @@ class ScaffoldGenerator
         array $fields = [],
         public $createModelClass = false,
     ) {
-        $this->model = Str::lower($model);
-        $this->models = Str::plural($this->model);
+        $this->model = Str::camel($model);
+        $this->models = Str::plural(str(splitPascalCase($model))->lower());
         $this->Model = $model;
 
         $this->adminAccess = $adminAccess;
@@ -121,7 +120,7 @@ class ScaffoldGenerator
             $this->createResourcePermissions();
         } catch (\Exception $e) {
             $this->removeDefaultDestinations();
-            Log::info(self::class, ['message' => $e->getMessage()]);
+            info(self::class, ['message' => $e->getMessage()]);
 
             return false;
         }
@@ -151,7 +150,7 @@ class ScaffoldGenerator
             $this->createResourcePermissions();
         } catch (\Exception $e) {
             $this->removeDefaultDestinations();
-            Log::info(self::class, ['message' => $e->getMessage()]);
+            info(self::class, ['message' => $e->getMessage()]);
 
             return false;
         }
@@ -185,7 +184,7 @@ class ScaffoldGenerator
             PermissionServices::new()->sync();
         } catch (\Exception $e) {
             $this->removeDefaultDestinations();
-            Log::info(self::class, ['message' => $e->getMessage()]);
+            info(self::class, ['message' => $e->getMessage()]);
 
             return false;
         }
