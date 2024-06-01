@@ -1,9 +1,21 @@
 import React, { useEffect } from 'react'
 import ApplicationLogo from '@/Components/ApplicationLogo'
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { themeChange } from 'theme-change'
+import { Toaster } from 'sonner'
+import { showToast } from '@/utils'
 
 export default function Guest({ children }) {
+    const {
+        props: { flash },
+    } = usePage()
+
+    useEffect(() => {
+        if (flash.message !== null) {
+            showToast(flash.message.message, flash.message.type)
+        }
+    }, [flash])
+
     useEffect(() => {
         themeChange(false)
         // 👆 false parameter is required for react project
@@ -22,6 +34,14 @@ export default function Guest({ children }) {
                     {children}
                 </div>
             </div>
+            <Toaster
+                theme="system"
+                richColors="true"
+                toastOptions={{
+                    duration: 3000,
+                    dismissible: true,
+                }}
+            />
         </div>
     )
 }

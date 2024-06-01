@@ -44,5 +44,6 @@ export default [
         icon: HiGlobeAlt,
         route: route('shortlink.link.index'),
         active: 'shortlink.link.*',
+        permission: 'view-shortlink',
     },
 ]

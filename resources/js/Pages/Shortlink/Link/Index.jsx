@@ -65,14 +65,23 @@ export default function Index(props) {
 
             <div>
                 <Card>
-                    <div className="flex justify-between mb-4">
-                        <Button
-                            size="sm"
-                            onClick={() => toggleFormModal()}
-                            type="primary"
-                        >
-                            Tambah
-                        </Button>
+                    <div className="flex flex-row justify-between mb-4">
+                        <div className="flex flex-row gap-1">
+                            <Button
+                                size="sm"
+                                onClick={() => toggleFormModal()}
+                                type="primary"
+                            >
+                                Tambah
+                            </Button>
+                            <a
+                                className="btn btn-secondary"
+                                href={route('shortlink.home')}
+                                target="_blank"
+                            >
+                                Front Page
+                            </a>
+                        </div>
                         <div className="flex items-center">
                             <SearchInput
                                 onChange={(e) => setSearch(e.target.value)}
@@ -88,6 +97,8 @@ export default function Index(props) {
                                     <th>Link</th>
                                     <th>Visited</th>
                                     <th>Last Visited At</th>
+                                    <th>Owner</th>
+                                    <th>Created At</th>
                                     <th className="min-w-[150px]" />
                                 </tr>
                             </thead>
@@ -114,6 +125,12 @@ export default function Index(props) {
                                             {formatDateTime(
                                                 link.last_visited_at
                                             )}
+                                        </td>
+                                        <td>
+                                            {link.user ? link.user.name : ''}
+                                        </td>
+                                        <td>
+                                            {formatDateTime(link.created_at)}
                                         </td>
                                         <td className="text-end">
                                             <div className="flex flex-row gap-1">

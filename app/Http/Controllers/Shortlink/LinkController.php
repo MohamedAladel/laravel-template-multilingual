@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Shortlink;
 
 use App\Http\Controllers\Controller;
+use App\Models\Default\Role;
 use App\Models\Shortlink\Link;
 use App\Models\Shortlink\LinkVisitor;
 use Illuminate\Http\Request;
@@ -13,7 +14,11 @@ class LinkController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Link::query();
+        $query = Link::with(['user']);
+
+        if (auth()->user()->role && auth()->user()->role->name == Role::GUEST) {
+            $query->where('user_id', auth()->id());
+        }
 
         if ($request->q) {
             $query->where('name', 'like', "%{$request->q}%");
@@ -56,7 +61,8 @@ class LinkController extends Controller
         $query->whereBetween(DB::raw('DATE(created_at)'), [$startDate, $endDate]);
 
         $charts = [];
-        $visitors = LinkVisitor::whereBetween(DB::raw('DATE(created_at)'), [$startDate, $endDate])
+        $visitors = LinkVisitor::where('link_id', $link->id)
+            ->whereBetween(DB::raw('DATE(created_at)'), [$startDate, $endDate])
             ->groupBy('date')
             ->get([
                 DB::raw('DATE(created_at) as date'),

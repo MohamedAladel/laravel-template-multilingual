@@ -47,5 +47,9 @@ class DefaultSeeder extends Seeder
             'password' => bcrypt('password'),
             'role_id' => $role->id,
         ]);
+
+        $guest = Role::create(['name' => Role::GUEST]);
+        $permission = Permission::where('name', 'view-shortlink')->first();
+        $guest->rolePermissions()->create(['permission_id' => $permission->id]);
     }
 }

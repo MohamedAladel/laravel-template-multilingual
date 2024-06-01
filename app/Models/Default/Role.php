@@ -4,6 +4,8 @@ namespace App\Models\Default;
 
 class Role extends Model
 {
+    const GUEST = 'guest';
+
     public $cascadeDeletes = ['rolePermissions'];
 
     protected $fillable = [

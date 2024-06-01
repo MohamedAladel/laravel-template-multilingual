@@ -69,6 +69,14 @@ export default function Index(props) {
                             </Button>
                         </div>
                     </div>
+                    <div className="flex flex-row justify-center gap-2 mt-5">
+                        <a href={route('login')} className="underline">
+                            Login
+                        </a>
+                        <a href={route('register')} className="underline">
+                            Daftar
+                        </a>
+                    </div>
                 </div>
 
                 {message?.link && (

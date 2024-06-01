@@ -18,6 +18,8 @@ class PermissionConstant
         ['label' => 'Delete Role', 'name' => 'delete-role'],
 
         ['label' => 'View Setting', 'name' => 'view-setting'],
+        ['label' => 'View Shortlink', 'name' => 'view-shortlink'],
+
 
         // #Add New Permission Below!
 

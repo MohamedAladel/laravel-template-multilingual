@@ -23,7 +23,7 @@ class Link extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\Models\Default\User::class);
+        return $this->belongsTo(\App\Models\Default\User::class, 'user_id');
     }
 
     public function visitor()
