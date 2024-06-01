@@ -1,4 +1,4 @@
-import { HiChartPie, HiUser, HiCog } from 'react-icons/hi'
+import { HiChartPie, HiUser, HiCog, HiGlobeAlt } from 'react-icons/hi'
 
 export default [
     {
@@ -37,5 +37,12 @@ export default [
         route: route('setting.index'),
         active: 'setting.index',
         permission: 'view-setting',
+    },
+    {
+        name: 'Shortlink',
+        show: true,
+        icon: HiGlobeAlt,
+        route: route('shortlink.link.index'),
+        active: 'shortlink.link.*',
     },
 ]

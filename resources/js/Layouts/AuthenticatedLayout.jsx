@@ -10,7 +10,11 @@ import Breadcrumb from '@/Components/DaisyUI/Breadcrumb'
 import ThemeSwitch from '@/Components/DaisyUI/ThemeSwitch'
 import { showToast } from '@/utils'
 
-export default function Authenticated({ children, page = '', action = '' }) {
+export default function AuthenticatedLayout({
+    children,
+    page = '',
+    action = '',
+}) {
     const {
         props: { auth, flash },
     } = usePage()

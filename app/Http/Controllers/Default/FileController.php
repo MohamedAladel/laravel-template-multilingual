@@ -13,11 +13,11 @@ class FileController extends Controller
 {
     public function show(string $name)
     {
-        if (Storage::disk('local')->exists('default/' . $name)) {
-            return Storage::disk('local')->get('default/' . $name);
+        if (Storage::disk('local')->exists('default/'.$name)) {
+            return Storage::disk('local')->get('default/'.$name);
         }
 
-        return Storage::disk('local')->get('public/' . $name);
+        return Storage::disk('local')->get('public/'.$name);
     }
 
     public function store(Request $request)

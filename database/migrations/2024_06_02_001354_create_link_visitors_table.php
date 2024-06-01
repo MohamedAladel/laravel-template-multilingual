@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('link_visitors', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('upload_name')->nullable();
-            $table->string('hash_name')->nullable();
-            $table->string('name')->nullable(); //re-/named by user
-            $table->string('type')->nullable(); // d / f
-            $table->string('dir')->nullable(); // parent dir
+            $table->uuid('link_id');
+            $table->text('request')->nullable();
+            $table->text('header')->nullable();
+            $table->string('device')->nullable();
+            $table->string('platform')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('languages')->nullable();
+            $table->string('ip')->nullable();
+            $table->string('useragent')->nullable();
+            $table->string('user_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->ulid('created_by')->nullable();
@@ -31,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('link_visitors');
     }
 };

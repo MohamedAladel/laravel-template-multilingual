@@ -71,6 +71,10 @@ export default function SidebarNav({ user, show, setShow }) {
             return item
         }
 
+        if (!('permission' in item)) {
+            return item
+        }
+
         return filterAllowedMenu(user, item)
     })
 

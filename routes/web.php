@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Default\FileController;
 use App\Http\Controllers\Default\GeneralController;
 use App\Http\Controllers\Default\ProfileController;
 use App\Http\Controllers\Default\RoleController;
 use App\Http\Controllers\Default\SettingController;
-use App\Http\Controllers\Default\FileController;
 use App\Http\Controllers\Default\UserController;
 use Illuminate\Support\Facades\Route;
 

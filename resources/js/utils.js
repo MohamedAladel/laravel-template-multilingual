@@ -3,10 +3,16 @@ import { toast } from 'sonner'
 import { isEmpty } from 'lodash'
 
 export const formatDate = (date) => {
+    if (isEmpty(date)) {
+        return ''
+    }
     return moment(date).format('DD/MM/yyyy')
 }
 
 export const formatDateTime = (date) => {
+    if (isEmpty(date)) {
+        return ''
+    }
     return moment(date).format('DD/MM/yyyy HH:mm:ss')
 }
 

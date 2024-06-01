@@ -32,6 +32,7 @@ class ZipServices
     ];
 
     protected $files = [];
+
     protected $hashMap = [];
 
     public function __construct()
@@ -51,7 +52,7 @@ class ZipServices
 
     public function create($source, $destination)
     {
-        if (!file_exists($source)) {
+        if (! file_exists($source)) {
             throw new Exception("file exists $destination");
         }
 
@@ -62,10 +63,10 @@ class ZipServices
         $pool = Pool::create();
         foreach ($chunks as $index => $chunk) {
             $pool->add(function () use ($chunk, $destination, $index) {
-                $zip = new ZipArchive();
+                $zip = new ZipArchive;
                 $zipFileName = preg_replace('/\.zip$/', "_part_$index.zip", $destination);
 
-                if ($zip->open($zipFileName, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== TRUE) {
+                if ($zip->open($zipFileName, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
                     throw new Exception("Cannot create zip file: $zipFileName");
                 }
 
@@ -82,13 +83,14 @@ class ZipServices
 
                 return $zipFileName;
             })->catch(function (Throwable $exception) {
-                info(self::class, ["Error : ", $exception->getMessage()]);
+                info(self::class, ['Error : ', $exception->getMessage()]);
             });
         }
 
         $pool->wait();
 
         $this->merge($destination, count($chunks));
+
         return true;
     }
 
@@ -98,7 +100,7 @@ class ZipServices
         $reads = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::LEAVES_ONLY);
 
         foreach ($reads as $name => $file) {
-            if (!$file->isDir()) {
+            if (! $file->isDir()) {
                 $filePath = $file->getRealPath();
                 $relativePath = substr($filePath, strlen($source) + 1);
 
@@ -134,17 +136,17 @@ class ZipServices
 
     private function merge($destination, $numParts)
     {
-        $finalZip = new ZipArchive();
+        $finalZip = new ZipArchive;
 
-        if ($finalZip->open($destination, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== TRUE) {
+        if ($finalZip->open($destination, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
             throw new Exception("Cannot create final zip file: $destination");
         }
 
         for ($i = 0; $i < $numParts; $i++) {
             $partZipFileName = preg_replace('/\.zip$/', "_part_$i.zip", $destination);
-            $partZip = new ZipArchive();
+            $partZip = new ZipArchive;
 
-            if ($partZip->open($partZipFileName) === TRUE) {
+            if ($partZip->open($partZipFileName) === true) {
                 for ($j = 0; $j < $partZip->numFiles; $j++) {
                     $file = $partZip->statIndex($j);
                     $finalZip->addFromString($file['name'], $partZip->getFromIndex($j));

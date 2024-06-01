@@ -9,6 +9,7 @@ if (!function_exists('splitPascalCase')) {
         foreach (explode(' ', $splitString) as $index => $s) {
             if ($index == 0) {
                 $word .= $s;
+
                 continue;
             }
             $word .= '-' . $s;

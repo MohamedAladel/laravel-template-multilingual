@@ -16,7 +16,9 @@ export default function Button(props) {
             type="button"
             disabled={props.disabled || props.processing || false}
             onClick={props.onClick}
-            className={`btn ${!type ? types.default : types[type]}`}
+            className={`btn ${!type ? types.default : types[type]} ${
+                props.className
+            }`}
         >
             {props.processing ? (
                 <>
