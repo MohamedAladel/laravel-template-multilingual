@@ -21,7 +21,10 @@ class LinkController extends Controller
         }
 
         if ($request->q) {
-            $query->where('name', 'like', "%{$request->q}%");
+            $query->where(function ($query) use ($request) {
+                $query->where('name', 'like', "%{$request->q}%")
+                    ->orWhere('real_link', 'like', "%{$request->q}%");
+            });
         }
 
         $query->orderBy('last_visited_at', 'desc');

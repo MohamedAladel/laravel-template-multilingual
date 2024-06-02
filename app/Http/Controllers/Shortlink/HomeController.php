@@ -44,7 +44,7 @@ class HomeController extends Controller
             'request' => json_encode(request()->input()),
             'header' => json_encode(request()->header()),
             'device' => request()->header('sec-ch-ua-mobile'),
-            'platform' => request()->header('sec-ch-ua-platform'),
+            'platform' => request()->header('sec-ch-ua-platform', 'bot'),
             'browser' => request()->header('sec-ch-ua'),
             'languages' => json_encode(request()->header('accept-language')),
             'ip' => request()->ip(),
