@@ -18,9 +18,12 @@ export default defineConfig({
                     moment: ['moment'],
                     daisyui: ['daisyui'],
                     sonner: ['sonner'],
+                    apexcharts: ['apexcharts'],
+                    reactapexcharts: ['react-apexcharts'],
                     reacttailwindcssdatepicker: [
                         'react-tailwindcss-datepicker',
                     ],
+                    reactjsonpretty: ['react-json-pretty'],
                 },
             },
         },

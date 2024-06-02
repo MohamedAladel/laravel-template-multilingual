@@ -13,11 +13,11 @@
         "firebase/php-jwt": "^6.10.1",
         "guzzlehttp/guzzle": "^7.8.1",
         "inertiajs/inertia-laravel": "^1.2",
-        "laravel/framework": "^11.9.1",
+        "laravel/framework": "^11.9.2",
         "laravel/prompts": "^0.1.23",
         "laravel/tinker": "^2.9.0",
         "react/async": "^4.2",
-        "spatie/async": "^1.6",
+        "spatie/async": "^1.6.1",
         "tightenco/ziggy": "^1.8.2"
     },
     "require-dev": {
