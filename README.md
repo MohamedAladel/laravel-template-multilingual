@@ -120,7 +120,7 @@ you can add a new language by
 
 add it to i18n resources it should look something like this
 ```js
-
+// resources\js\i18n.js
 import translation_en from './Translations/en/translation.json'
 import translation_ar from './Translations/ar/translation.json'//#1//import the translation
 
