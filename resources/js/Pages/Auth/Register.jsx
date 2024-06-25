@@ -5,7 +5,10 @@ import GuestLayout from '@/Layouts/GuestLayout'
 import TextInput from '@/Components/DaisyUI/TextInput'
 import Button from '@/Components/DaisyUI/Button'
 
+import { useTranslation } from 'react-i18next';
 export default function Register() {
+    const {t,i18n}=useTranslation()
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -36,12 +39,12 @@ export default function Register() {
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title={t('Register')} />
 
             <form onSubmit={submit}>
                 <div>
                     <TextInput
-                        label="Name"
+                        label={t('Name')}
                         type="text"
                         name="name"
                         value={data.name}
@@ -52,7 +55,7 @@ export default function Register() {
 
                 <div className="mt-4">
                     <TextInput
-                        label="Email"
+                        label={t('Email')}
                         type="email"
                         name="email"
                         value={data.email}
@@ -63,7 +66,7 @@ export default function Register() {
 
                 <div className="mt-4">
                     <TextInput
-                        label="Password"
+                        label={t('Password')}
                         type="password"
                         name="password"
                         value={data.password}
@@ -74,7 +77,7 @@ export default function Register() {
 
                 <div className="mt-4">
                     <TextInput
-                        label="Confirm Password"
+                        label={t('Confirm Password')}
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
@@ -85,16 +88,16 @@ export default function Register() {
 
                 <div className="flex items-center justify-end mt-4 gap-1">
                     <Link href={route('login')} className="link">
-                        Already registered?
+                        {t('Already registered?')}
                     </Link>
 
                     <Button
-                        className="ml-4"
+                        className="ms-4"
                         processing={processing}
                         onClick={submit}
                         type="primary"
                     >
-                        Register
+                        {t('Register')}
                     </Button>
                 </div>
             </form>

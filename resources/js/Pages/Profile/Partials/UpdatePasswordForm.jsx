@@ -3,8 +3,10 @@ import { useForm } from '@inertiajs/react'
 
 import TextInput from '@/Components/DaisyUI/TextInput'
 import Button from '@/Components/DaisyUI/Button'
-
+import { useTranslation } from 'react-i18next';
 export default function UpdatePasswordForm({ className }) {
+    const {t,i18n}=useTranslation()
+
     const passwordInput = useRef()
     const currentPasswordInput = useRef()
 
@@ -37,12 +39,11 @@ export default function UpdatePasswordForm({ className }) {
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-base-content">
-                    Update Password
+                    {t('Update Password')}
                 </h2>
 
                 <p className="mt-1 text-sm text-base-content">
-                    Ensure your account is using a long, random password to stay
-                    secure.
+                    {t('long password advice')}
                 </p>
             </header>
 
@@ -51,7 +52,7 @@ export default function UpdatePasswordForm({ className }) {
                     <TextInput
                         id="current_password"
                         ref={currentPasswordInput}
-                        label="Current Password"
+                        label={t('Current Password')}
                         value={data.current_password}
                         onChange={(e) =>
                             setData('current_password', e.target.value)
@@ -67,7 +68,7 @@ export default function UpdatePasswordForm({ className }) {
                     <TextInput
                         id="password"
                         ref={passwordInput}
-                        label="New Password"
+                        label={t('New Password')}
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                         type="password"
@@ -81,7 +82,7 @@ export default function UpdatePasswordForm({ className }) {
                     <TextInput
                         id="password_confirmation"
                         value={data.password_confirmation}
-                        label="Confirm Password"
+                        label={t('Confirm Password')}
                         onChange={(e) =>
                             setData('password_confirmation', e.target.value)
                         }
@@ -98,7 +99,7 @@ export default function UpdatePasswordForm({ className }) {
                         processing={processing}
                         type="primary"
                     >
-                        Save
+                        {t('Save')}
                     </Button>
                 </div>
             </div>

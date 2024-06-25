@@ -3,7 +3,7 @@ import { Link, router, usePage } from '@inertiajs/react'
 import { HiLogout, HiOutlineX } from 'react-icons/hi'
 import { filterAllowedMenu } from './helpers.cjs'
 import routes from './routes.cjs'
-
+import { useTranslation } from 'react-i18next';
 const SidebarItem = ({ item }) => {
     return (
         <li>
@@ -51,12 +51,14 @@ const SidebarItemGroup = ({ item }) => {
 }
 
 export default function SidebarNav({ user, show, setShow }) {
+    const {t,i18n}=useTranslation()
+
     const {
         props: {
             app: { app_name },
         },
     } = usePage()
-    const menus = routes.filter((item) => {
+    const menus = routes().filter((item) => {
         item.open = false
 
         if (!item.show) {
@@ -117,7 +119,7 @@ export default function SidebarNav({ user, show, setShow }) {
                                         className="h-4 w-4"
                                         aria-hidden="true"
                                     />
-                                    Logout
+                                    {t('Logout')}
                                 </div>
                             </li>
                         </ul>
@@ -125,7 +127,7 @@ export default function SidebarNav({ user, show, setShow }) {
                 </div>
             </div>
             <div className="p-6">
-                <p className="text-sm font-light text-center bottom-4 left-4 text-base-content">
+                <p className="text-sm font-light text-center bottom-4 start-4 text-base-content">
                     {app_name} &copy; {new Date().getFullYear()}
                 </p>
             </div>

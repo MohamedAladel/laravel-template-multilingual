@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Default\FileController;
 use App\Http\Controllers\Default\GeneralController;
 use App\Http\Controllers\Default\ProfileController;
@@ -37,6 +38,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // #Admin
+Route::delete('customers/{customer}', [CustomerController::class,'destroy'])->name('customers.destroy');
+Route::put('customers/{customer}', [CustomerController::class,'update'])->name('customers.update');
+Route::post('customers', [CustomerController::class,'store'])->name('customers.store');
+Route::get('customers', [CustomerController::class,'index'])->name('customers.index');
 });
 
 // #Guest

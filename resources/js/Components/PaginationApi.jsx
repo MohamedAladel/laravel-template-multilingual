@@ -10,7 +10,7 @@ const PageLink = ({ active, label, page, onPageChange }) => {
             <li>
                 <button
                     onClick={() => onPageChange(+page - 1)}
-                    className="block py-2 px-1 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="block py-2 px-1 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     aria-label="Previous"
                 >
                     <HiOutlineChevronLeft className="w-5 h-5" />
@@ -48,7 +48,7 @@ const PageInactive = ({ label }) => {
         return (
             <li>
                 <button
-                    className="block py-2 px-1 ml-0 leading-tight text-gray-500 bg-white border rounded-l-lg dark:bg-gray-800 border-gray-100 dark:text-gray-400 dark:border-gray-700"
+                    className="block py-2 px-1 ms-0 leading-tight text-gray-500 bg-white border rounded-l-lg dark:bg-gray-800 border-gray-100 dark:text-gray-400 dark:border-gray-700"
                     disabled={true}
                     aria-label="Previous"
                 >

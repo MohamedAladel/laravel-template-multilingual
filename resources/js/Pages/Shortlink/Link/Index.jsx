@@ -13,7 +13,10 @@ import Card from '@/Components/DaisyUI/Card'
 import FormModal from './FormModal'
 import { formatDateTime, showToast } from '@/utils'
 
+import { useTranslation } from 'react-i18next';
+
 export default function Index(props) {
+    const { t,i18n } = useTranslation();
     const {
         data: { links, data },
     } = props
@@ -72,7 +75,7 @@ export default function Index(props) {
                                 onClick={() => toggleFormModal()}
                                 type="primary"
                             >
-                                Tambah
+                                {t('Add')}
                             </Button>
                             <a
                                 className="btn btn-secondary"

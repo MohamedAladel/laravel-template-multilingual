@@ -6,8 +6,9 @@ import Modal from '@/Components/DaisyUI/Modal'
 import Button from '@/Components/DaisyUI/Button'
 import TextInput from '@/Components/DaisyUI/TextInput'
 import RoleSelectionInput from '@/Components/DaisyUI/SelectionInput'
-
+import { useTranslation } from 'react-i18next';
 export default function FormModal(props) {
+    const{t,i18n}=useTranslation()
     const { modalState } = props
     const { data, setData, post, put, processing, errors, reset, clearErrors } =
         useForm({
@@ -74,7 +75,7 @@ export default function FormModal(props) {
                     name="name"
                     value={data.name}
                     onChange={handleOnChange}
-                    label="Name"
+                    label={t('Name')}
                     error={errors.name}
                 />
 
@@ -82,7 +83,7 @@ export default function FormModal(props) {
                     name="email"
                     value={data.email}
                     onChange={handleOnChange}
-                    label="Email"
+                    label={t('Email')}
                     error={errors.email}
                 />
                 <TextInput
@@ -90,13 +91,13 @@ export default function FormModal(props) {
                     name="password"
                     value={data.password}
                     onChange={handleOnChange}
-                    label="Password"
+                    label={t('Password')}
                     error={errors.password}
                 />
                 {data.role !== null && (
                     <>
                         <RoleSelectionInput
-                            label="Role"
+                            label={t('Role')}
                             itemSelected={data.role_id}
                             onItemSelected={(item) =>
                                 setData('role_id', item ? item.id : null)
@@ -118,10 +119,10 @@ export default function FormModal(props) {
                     processing={processing}
                     type="primary"
                 >
-                    Simpan
+                    {t('Save')}
                 </Button>
                 <Button onClick={handleClose} type="secondary">
-                    Batal
+                    {t('Cancel')}
                 </Button>
             </div>
         </Modal>

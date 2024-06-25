@@ -1,0 +1,53 @@
+{
+  "Save": "Save",
+  "cancel": "Cancel",
+  "Cancel": "Cancel",
+  "Options": "Options",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Logout": "Logout",
+  "Profile": "Profile",
+  "Password": "Password",
+  "Confirm": "Confirm",
+  "Confirm Password": "Confirm Password",
+  "Forgot Password": "Forgot Password",
+  "Email": "Email",
+  "Email Password Reset Link": "Email Password Reset Link",
+  "Remember me": "Remember me",
+  "Log in": "Log in",
+  "Register": "Register",
+  "Name": "Name",
+  "Already registered?": "Already registered?",
+  "Reset Password": "Reset Password",
+  "Email Verification": "Email Verification",
+  "Resend Verification Email": "Resend Verification Email",
+  "Log Out": "Log Out",
+  "Update Password": "Update Password",
+  "long password advice": "Ensure your account is using a long, random password to stay secure.",
+  "Current Password": "Current Password",
+  "New Password": "New Password",
+  "Profile Information": "Profile Information",
+  "Update your accounts profile information and email address": "Update your account's profile information and email address.",
+  "Your email address is unverified": {
+    "": "Your email address is unverified."
+  },
+  "Click here to re-send the verification email": {
+    "": "Click here to re-send the verification email."
+  },
+  "A new verification link has been sent to your email address": {
+    "": "A new verification link has been sent to your email address."
+  },
+  "Role": "Role",
+  "Check All": "Check All",
+  "Setting": "Setting",
+  "App Name": "App Name",
+  "App Logo": "App Logo",
+  "Dashboard": "Dashboard",
+  "Roles": "Roles",
+  "Users": "Users",
+  "Empty": "Empty",
+  "Shortlink": "Shortlink",
+  "User": "User",
+  "Customer": "Customer",
+  "Search": "Search"
+}

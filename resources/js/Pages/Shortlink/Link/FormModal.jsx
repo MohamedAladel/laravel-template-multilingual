@@ -6,7 +6,9 @@ import Modal from '@/Components/DaisyUI/Modal'
 import Button from '@/Components/DaisyUI/Button'
 import TextInput from '@/Components/DaisyUI/TextInput'
 
+import { useTranslation } from 'react-i18next';
 export default function FormModal(props) {
+    const{t,i18n}=useTranslation()
     const { modalState } = props
     const { data, setData, post, put, processing, errors, reset, clearErrors } =
         useForm({
@@ -100,10 +102,10 @@ export default function FormModal(props) {
                     processing={processing}
                     type="primary"
                 >
-                    Simpan
+                    {t('Save')}
                 </Button>
                 <Button onClick={handleClose} type="secondary">
-                    Batal
+                    {t('Cancel')}
                 </Button>
             </div>
         </Modal>

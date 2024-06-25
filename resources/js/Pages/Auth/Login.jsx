@@ -5,7 +5,10 @@ import TextInput from '@/Components/DaisyUI/TextInput'
 import Checkbox from '@/Components/DaisyUI/Checkbox'
 import Button from '@/Components/DaisyUI/Button'
 
+import { useTranslation } from 'react-i18next';
 export default function Login({ status }) {
+    const {t,i18n}=useTranslation()
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -41,7 +44,7 @@ export default function Login({ status }) {
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head title={t('Log in')} />
 
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">
@@ -53,7 +56,7 @@ export default function Login({ status }) {
                 <div>
                     <TextInput
                         type="text"
-                        label="Email"
+                        label={t('Email')}
                         name="email"
                         placeholder="you@site.com"
                         value={data.email}
@@ -68,7 +71,7 @@ export default function Login({ status }) {
                 <div className="mt-4">
                     <TextInput
                         type="password"
-                        label="Password"
+                        label={t('Password')}
                         name="password"
                         placeholder="password"
                         value={data.password}
@@ -81,7 +84,7 @@ export default function Login({ status }) {
 
                 <div className="mt-4">
                     <Checkbox
-                        label="Remember me"
+                        label={t('Remember me')}
                         name="remember"
                         value={data.remember}
                         onChange={onHandleChange}
@@ -95,7 +98,7 @@ export default function Login({ status }) {
                         processing={processing}
                         type={'primary'}
                     >
-                        Log in
+                        {t('Log in')}
                     </Button>
                 </div>
             </form>

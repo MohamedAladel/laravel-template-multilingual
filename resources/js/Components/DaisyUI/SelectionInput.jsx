@@ -251,7 +251,7 @@ export default function SelectionInput(props) {
                                 <div className="flex flex-col w-full">
                                     {loading ? (
                                         <div>
-                                            <div className="flex w-full items-center p-2 pl-2 border-transparent relative">
+                                            <div className="flex w-full items-center p-2 ps-2 border-transparent relative">
                                                 <div className="w-full items-center justify-center flex mx-2 my-5 gap-2">
                                                     <Spinner />
                                                     <span>Loading...</span>
@@ -267,7 +267,7 @@ export default function SelectionInput(props) {
                                                         handleSelectItem(item)
                                                     }
                                                 >
-                                                    <div className="flex w-full items-center p-2 pl-2 relative bg-base-100 hover:bg-opacity-10">
+                                                    <div className="flex w-full items-center p-2 ps-2 relative bg-base-100 hover:bg-opacity-10">
                                                         <div className="w-full items-center flex">
                                                             <div className="mx-2">
                                                                 {display_name.map(

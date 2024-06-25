@@ -80,11 +80,11 @@ export default function Form(props) {
                                     processing={processing}
                                     type="primary"
                                 >
-                                    Simpan
+                                    {t('Save')}
                                 </Button>
                                 <Link href={route('{{ models }}.index')}>
                                     <Button type="secondary">
-                                        Kembali
+                                        {{t('Cancel')}}
                                     </Button>
                                 </Link>
                             </div>

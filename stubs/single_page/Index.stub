@@ -50,7 +50,7 @@ export default function Page(props) {
                             processing={processing}
                             type="primary"
                         >
-                            Simpan
+                            {t('Save')}
                         </Button>
                     </div>
                 </Card>

@@ -5,8 +5,8 @@ import { isEmpty } from 'lodash'
 import Modal from '@/Components/DaisyUI/Modal'
 import Button from '@/Components/DaisyUI/Button'
 import TextInput from '@/Components/DaisyUI/TextInput'
-
 import { useTranslation } from 'react-i18next';
+
 export default function FormModal(props) {
     const{t,i18n}=useTranslation()
     const { modalState } = props
@@ -26,6 +26,7 @@ export default function FormModal(props) {
         )
     }
 
+    
     const handleReset = () => {
         modalState.setData(null)
         reset()
@@ -38,30 +39,30 @@ export default function FormModal(props) {
     }
 
     const handleSubmit = () => {
-        const {{ model }} = modalState.data
-        if ({{ model }} !== null) {
-            put(route('{{ models }}.update', {{ model }}), {
+        const customer = modalState.data
+        if (customer !== null) {
+            put(route('customers.update', customer), {
                 onSuccess: () => handleClose(),
             })
             return
         }
-        post(route('{{ models }}.store'), {
+        post(route('customers.store'), {
             onSuccess: () => handleClose(),
         })
     }
 
     useEffect(() => {
-        const {{ model }} = modalState.data
-        if (isEmpty({{ model }}) === false) {
+        const customer = modalState.data
+        if (isEmpty(customer) === false) {
             setData({
-                name: {{ model }}.name
+                name: customer.name
             })
             return
         }
     }, [modalState])
 
     return (
-        <Modal isOpen={modalState.isOpen} onClose={handleClose} title={'{{ model }}'}>
+        <Modal isOpen={modalState.isOpen} onClose={handleClose} title={'customer'}>
             <div className="form-control space-y-2.5">
                 <TextInput
                     name="name"
@@ -77,10 +78,10 @@ export default function FormModal(props) {
                         processing={processing}
                         type="primary"
                     >
-                        {{t('Save')}}
+                        {t('Save')}
                     </Button>
                     <Button onClick={handleClose} type="secondary">
-                        {{t('Cancel')}}
+                        {t('Cancel')}
                     </Button>
                 </div>
             </div>

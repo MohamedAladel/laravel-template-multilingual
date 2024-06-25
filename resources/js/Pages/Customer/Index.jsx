@@ -13,11 +13,12 @@ import Button from '@/Components/DaisyUI/Button'
 import Dropdown from '@/Components/DaisyUI/Dropdown'
 import Card from '@/Components/DaisyUI/Card'
 import FormModal from './FormModal'
-
 import { useTranslation } from 'react-i18next';
+
 
 export default function Index(props) {
     const { t,i18n } = useTranslation();
+
     const {
         data: { links, data },
     } = props
@@ -28,19 +29,19 @@ export default function Index(props) {
     const confirmModal = useModalState()
     const formModal = useModalState()
 
-    const toggleFormModal = ({{ model }} = null) => {
-        formModal.setData({{ model }})
+    const toggleFormModal = (customer = null) => {
+        formModal.setData(customer)
         formModal.toggle()
     }
 
-    const handleDeleteClick = ({{ model }}) => {
-        confirmModal.setData({{ model }})
+    const handleDeleteClick = (customer) => {
+        confirmModal.setData(customer)
         confirmModal.toggle()
     }
 
     const onDelete = () => {
         if (confirmModal.data !== null) {
-            router.delete(route('{{ models }}.destroy', confirmModal.data.id))
+            router.delete(route('customers.destroy', confirmModal.data.id))
         }
     }
 
@@ -59,19 +60,19 @@ export default function Index(props) {
     }, [search])
 
     return (
-        <AuthenticatedLayout page={'System'} action={'{{ Model }}'}>
-            <Head title=" {{ model }}" />
+        <AuthenticatedLayout page={'System'} action={'Customer'}>
+            <Head title=" customer" />
 
             <div>
                 <Card>
                     <div className="flex justify-between mb-4">
-                        <HasPermission p="create-{{ model }}">
+                        <HasPermission p="create-customer">
                             <Button
                                 size="sm"
                                 onClick={() => toggleFormModal()}
                                 type="primary"
                             >
-                                {{t('Add')}}
+                                {t('Add')}
                             </Button>
                         </HasPermission>
                         <div className="flex items-center">
@@ -90,36 +91,36 @@ export default function Index(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data.map(({{ model }}, index) => (
-                                    <tr key={{{ model }}.id}>
-                                        <td>{{{ model }}.name}</td>
+                                {data.map((customer, index) => (
+                                    <tr key={customer.id}>
+                                        <td>{customer.name}</td>
                                         <td className="text-end">
-                                            <Dropdown label={{t('Options')}}>
-                                                <HasPermission p="update-{{ model }}">
+                                            <Dropdown label={t('Options')}>
+                                                <HasPermission p="update-customer">
                                                     <Dropdown.Item
                                                         onClick={() =>
                                                             toggleFormModal(
-                                                                {{ model }}
+                                                                customer
                                                             )
                                                         }
                                                     >
                                                         <div className="flex space-x-1 items-center">
                                                             <HiPencil />
-                                                            <div>{{t('Edit')}}</div>
+                                                            <div>{t('Edit')}</div>
                                                         </div>
                                                     </Dropdown.Item>
                                                 </HasPermission>
-                                                <HasPermission p="delete-{{ model }}">
+                                                <HasPermission p="delete-customer">
                                                     <Dropdown.Item
                                                         onClick={() =>
                                                             handleDeleteClick(
-                                                                {{ model }}
+                                                                customer
                                                             )
                                                         }
                                                     >
                                                         <div className="flex space-x-1 items-center">
                                                             <HiTrash />
-                                                            <div>{{t('Delete')}}</div>
+                                                            <div>{t('Delete')}</div>
                                                         </div>
                                                     </Dropdown.Item>
                                                 </HasPermission>

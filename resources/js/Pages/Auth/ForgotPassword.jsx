@@ -5,7 +5,10 @@ import GuestLayout from '@/Layouts/GuestLayout'
 import TextInput from '@/Components/DaisyUI/TextInput'
 import Button from '@/Components/DaisyUI/Button'
 
+import { useTranslation } from 'react-i18next';
 export default function ForgotPassword({ status }) {
+    const {t,i18n}=useTranslation()
+
     const { data, setData, post, processing, errors } = useForm({
         email: '',
     })
@@ -22,7 +25,7 @@ export default function ForgotPassword({ status }) {
 
     return (
         <GuestLayout>
-            <Head title="Forgot Password" />
+            <Head title={t('Forgot Password')} />
 
             <div className="mb-4 text-sm text-gray-600">
                 Forgot your password? No problem. Just let us know your email
@@ -38,7 +41,7 @@ export default function ForgotPassword({ status }) {
 
             <form onSubmit={submit}>
                 <TextInput
-                    label="Email"
+                    label={t('Email')}
                     type="text"
                     name="email"
                     value={data.email}
@@ -48,11 +51,11 @@ export default function ForgotPassword({ status }) {
 
                 <div className="flex items-center justify-end mt-4">
                     <Button
-                        className="ml-4"
+                        className="ms-4"
                         processing={processing}
                         onClick={submit}
                     >
-                        Email Password Reset Link
+                        {t('Email Password Reset Link')}
                     </Button>
                 </div>
             </form>

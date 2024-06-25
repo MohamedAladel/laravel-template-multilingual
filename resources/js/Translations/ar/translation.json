@@ -1,0 +1,55 @@
+{
+  "Add": "إضافة",	
+  "Save": "حفظ",
+  "cancel": "إلغاء",
+  "Cancel": "إلغاء",
+  "Options": "خيارات",
+  "Edit": "تعديل",
+  "Delete": "حذف",
+  "Logout": "تسجيل الخروج",
+  "Profile": "الملف الشخصي",
+  "Password": "كلمة المرور",
+  "Confirm": "تأكيد",
+  "Confirm Password": "تأكيد كلمة المرور",
+  "Forgot Password": "نسيت كلمة المرور",
+  "Email": "البريد الإلكتروني",
+  "Email Password Reset Link": "إرسال رابط إعادة تعيين كلمة المرور",
+  "Remember me": "تذكرني",
+  "Log in": "تسجيل الدخول",
+  "Register": "تسجيل",
+  "Name": "الاسم",
+  "Already registered?": "مسجل بالفعل؟",
+  "Reset Password": "إعادة تعيين كلمة المرور",
+  "Email Verification": "تأكيد البريد الإلكتروني",
+  "Resend Verification Email": "إعادة إرسال بريد التحقق",
+  "Log Out": "تسجيل الخروج",
+  "Update Password": "تحديث كلمة المرور",
+  "long password advice": "تأكد من أن حسابك يستخدم كلمة مرور طويلة وعشوائية للبقاء آمناً.",
+  "Current Password": "كلمة المرور الحالية",
+  "New Password": "كلمة المرور الجديدة",
+  "Profile Information": "معلومات الملف الشخصي",
+  "Update your accounts profile information and email address": "قم بتحديث معلومات ملفك الشخصي وعنوان بريدك الإلكتروني.",
+  "Your email address is unverified": {
+    "": "لم يتم التحقق من عنوان بريدك الإلكتروني."
+  },
+  "Click here to re-send the verification email": {
+    "": "انقر هنا لإعادة إرسال بريد التحقق."
+  },
+  "A new verification link has been sent to your email address": {
+    "": "تم إرسال رابط تحقق جديد إلى عنوان بريدك الإلكتروني."
+  },
+  "Role": "الدور",
+  "Check All": "تحديد الكل",
+  "App Name": "اسم التطبيق",
+  "App Logo": "شعار التطبيق",
+  "Dashboard": "لوحة التحكم",
+  "Roles": "الأدوار",
+  "Users": "المستخدمون",
+  "Empty": "فارغ",
+  "Shortlink": "الروابط",
+  "User": "المستخدم",
+  "Customer": "الزبائن",
+  "Setting": "الاعدادات",
+  "Search": "بحث"
+  
+}

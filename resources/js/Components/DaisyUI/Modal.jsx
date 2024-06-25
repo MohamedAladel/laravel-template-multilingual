@@ -12,7 +12,7 @@ export default function Modal({ children, title = '', isOpen, onClose }) {
                 <h3 className="font-bold text-lg">{title}</h3>
                 <form method="dialog">
                     <button
-                        className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                        className="btn btn-sm btn-circle btn-ghost absolute end-2 top-2"
                         onClick={onClose}
                     >
                         <HiX className="h-4 w-4" />

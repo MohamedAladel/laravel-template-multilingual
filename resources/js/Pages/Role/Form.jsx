@@ -7,8 +7,9 @@ import TextInput from '@/Components/DaisyUI/TextInput'
 import Button from '@/Components/DaisyUI/Button'
 import Checkbox from '@/Components/DaisyUI/Checkbox'
 import Card from '@/Components/DaisyUI/Card'
-
+import { useTranslation } from 'react-i18next';
 export default function Role(props) {
+    const {t,i18n}= useTranslation()
     const {
         props: { errors },
     } = usePage()
@@ -108,7 +109,7 @@ export default function Role(props) {
             page={'System'}
             action={'Role'}
         >
-            <Head title="Role" />
+            <Head title={t('Role')} />
 
             <div>
                 <Card>
@@ -117,11 +118,11 @@ export default function Role(props) {
                             name="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            label="Name"
+                            label={t('Name')}
                             error={errors.name}
                         />
                         <Checkbox
-                            label={'Check All'}
+                            label={t('Check All')}
                             onChange={handleCheckAll}
                         />
                         <div
@@ -153,10 +154,10 @@ export default function Role(props) {
                                     processing={processing}
                                     type="primary"
                                 >
-                                    Simpan
+                                    {t('Save')}
                                 </Button>
                                 <Link href={route('roles.index')}>
-                                    <Button type="secondary">Kembali</Button>
+                                    <Button type="secondary">{t('Cancel')}</Button>
                                 </Link>
                             </div>
                         </div>

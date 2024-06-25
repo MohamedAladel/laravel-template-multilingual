@@ -14,7 +14,10 @@ import Dropdown from '@/Components/DaisyUI/Dropdown'
 import Button from '@/Components/DaisyUI/Button'
 import Card from '@/Components/DaisyUI/Card'
 
+import { useTranslation } from 'react-i18next';
+
 export default function Index(props) {
+    const { t,i18n } = useTranslation();
     const {
         data: { links, data },
     } = props
@@ -51,7 +54,7 @@ export default function Index(props) {
 
     return (
         <AuthenticatedLayout page={'System'} action={'Role'}>
-            <Head title="Role" />
+            <Head title={t('Role')} />
 
             <div>
                 <Card>
@@ -59,7 +62,7 @@ export default function Index(props) {
                         <HasPermission p="create-role">
                             <Link href={route('roles.create')}>
                                 <Button size="sm" type="primary">
-                                    Tambah
+                                    {t('Add')}
                                 </Button>
                             </Link>
                         </HasPermission>
@@ -75,7 +78,7 @@ export default function Index(props) {
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>{t('Name')}</th>
                                     <th />
                                 </tr>
                             </thead>
@@ -84,7 +87,7 @@ export default function Index(props) {
                                     <tr key={role.id}>
                                         <td>{role.name}</td>
                                         <td className="text-right">
-                                            <Dropdown label={'Opsi'}>
+                                            <Dropdown label={t('Options')}>
                                                 <HasPermission p="update-role">
                                                     <Dropdown.Item
                                                         onClick={() =>
@@ -98,7 +101,7 @@ export default function Index(props) {
                                                     >
                                                         <div className="flex space-x-1 items-center">
                                                             <HiPencil />
-                                                            <div>Ubah</div>
+                                                            <div>{t('Edit')}</div>
                                                         </div>
                                                     </Dropdown.Item>
                                                 </HasPermission>
@@ -112,7 +115,7 @@ export default function Index(props) {
                                                     >
                                                         <div className="flex space-x-1 items-center">
                                                             <HiTrash />
-                                                            <div>Hapus</div>
+                                                            <div>{t('Delete')}</div>
                                                         </div>
                                                     </Dropdown.Item>
                                                 </HasPermission>

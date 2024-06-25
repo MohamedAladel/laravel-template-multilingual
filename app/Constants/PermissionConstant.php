@@ -22,6 +22,10 @@ class PermissionConstant
 
 
         // #Add New Permission Below!
+		['label' => 'Delete Customer', 'name' => 'delete-customer'],
+		['label' => 'Update Customer', 'name' => 'update-customer'],
+		['label' => 'Create Customer', 'name' => 'create-customer'],
+		['label' => 'View Customer', 'name' => 'view-customer'],
 
     ];
 }

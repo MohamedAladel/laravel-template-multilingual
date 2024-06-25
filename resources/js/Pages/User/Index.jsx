@@ -14,7 +14,10 @@ import Dropdown from '@/Components/DaisyUI/Dropdown'
 import Card from '@/Components/DaisyUI/Card'
 import FormModal from './FormModal'
 
+import { useTranslation } from 'react-i18next';
+
 export default function Index(props) {
+    const { t,i18n } = useTranslation();
     const {
         data: { links, data },
     } = props
@@ -68,7 +71,7 @@ export default function Index(props) {
                                 onClick={() => toggleFormModal()}
                                 type="primary"
                             >
-                                Tambah
+                                {t('Add')}
                             </Button>
                         </HasPermission>
                         <div className="flex items-center">
@@ -82,8 +85,8 @@ export default function Index(props) {
                         <table className="table mb-4">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Role</th>
+                                    <th>{t('Name')}</th>
+                                    <th>{t('Role')}</th>
                                     <th />
                                 </tr>
                             </thead>
@@ -98,7 +101,7 @@ export default function Index(props) {
                                         </td>
                                         <td className="text-end">
                                             <Dropdown
-                                                label={'Opsi'}
+                                                label={t('Options')}
                                                 last={
                                                     index + 1 === +data.length
                                                 }
@@ -113,7 +116,7 @@ export default function Index(props) {
                                                     >
                                                         <div className="flex space-x-1 items-center">
                                                             <HiPencil />
-                                                            <div>Ubah</div>
+                                                            <div>{t('Edit')}</div>
                                                         </div>
                                                     </Dropdown.Item>
                                                 </HasPermission>
@@ -127,7 +130,7 @@ export default function Index(props) {
                                                     >
                                                         <div className="flex space-x-1 items-center">
                                                             <HiTrash />
-                                                            <div>Hapus</div>
+                                                            <div>{t('Delete')}</div>
                                                         </div>
                                                     </Dropdown.Item>
                                                 </HasPermission>

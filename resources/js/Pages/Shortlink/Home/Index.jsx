@@ -7,7 +7,10 @@ import Button from '@/Components/DaisyUI/Button'
 import { HiClipboardCopy } from 'react-icons/hi'
 import { showToast } from '@/utils'
 
+import { useTranslation } from 'react-i18next';
+
 export default function Index(props) {
+    const { t,i18n } = useTranslation();
     const {
         flash: { message },
     } = props

@@ -15,7 +15,7 @@ export default function VerifyEmail({ status }) {
 
     return (
         <GuestLayout>
-            <Head title="Email Verification" />
+            <Head title={t('Email Verification')} />
 
             <div className="mb-4 text-sm text-gray-600">
                 Thanks for signing up! Before getting started, could you verify
@@ -34,7 +34,7 @@ export default function VerifyEmail({ status }) {
             <form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
                     <Button processing={processing} onClick={submit}>
-                        Resend Verification Email
+                        {t('Resend Verification Email')}
                     </Button>
 
                     <Link
@@ -43,7 +43,7 @@ export default function VerifyEmail({ status }) {
                         as="button"
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Log Out
+                        {t('Log Out')}
                     </Link>
                 </div>
             </form>

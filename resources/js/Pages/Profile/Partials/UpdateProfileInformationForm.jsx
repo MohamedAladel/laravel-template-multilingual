@@ -3,13 +3,15 @@ import { Link, useForm, usePage } from '@inertiajs/react'
 
 import TextInput from '@/Components/DaisyUI/TextInput'
 import Button from '@/Components/DaisyUI/Button'
-
+import { useTranslation } from 'react-i18next';
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
     className,
 }) {
     const user = usePage().props.auth.user
+
+    const {t,i18n}=useTranslation()
 
     const { data, setData, patch, errors, processing } = useForm({
         name: user.name,
@@ -25,11 +27,11 @@ export default function UpdateProfileInformation({
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-base-content">
-                    Profile Information
+                    {t('Profile Information')}
                 </h2>
 
                 <p className="mt-1 text-sm text-base-content">
-                    Update your account's profile information and email address.
+                    {t('Update your accounts profile information and email address')}
                 </p>
             </header>
 
@@ -39,7 +41,7 @@ export default function UpdateProfileInformation({
                         id="name"
                         type="text"
                         className="mt-1 block w-full"
-                        label="Name"
+                        label={t('Name')}
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
                         autoFocus={true}
@@ -52,7 +54,7 @@ export default function UpdateProfileInformation({
                     <TextInput
                         id="email"
                         type="email"
-                        label="Email"
+                        label={t('Email')}
                         className="mt-1 block w-full"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
@@ -64,21 +66,20 @@ export default function UpdateProfileInformation({
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="text-sm mt-2 text-gray-800">
-                            Your email address is unverified.
+                            {t('Your email address is unverified.')}
                             <Link
                                 href={route('verification.send')}
                                 method="post"
                                 as="button"
                                 className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
-                                Click here to re-send the verification email.
+                                {t('Click here to re-send the verification email.')}
                             </Link>
                         </p>
 
                         {status === 'verification-link-sent' && (
                             <div className="mt-2 font-medium text-sm text-green-600">
-                                A new verification link has been sent to your
-                                email address.
+                                {t('A new verification link has been sent to your email address.')}
                             </div>
                         )}
                     </div>
@@ -90,7 +91,7 @@ export default function UpdateProfileInformation({
                         processing={processing}
                         type="primary"
                     >
-                        Save
+                        {t('Save')}
                     </Button>
                 </div>
             </div>

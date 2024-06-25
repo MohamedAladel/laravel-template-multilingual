@@ -5,11 +5,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import UpdatePasswordForm from './Partials/UpdatePasswordForm'
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm'
 import Card from '@/Components/DaisyUI/Card'
-
+import { useTranslation } from 'react-i18next';
 export default function Edit({ mustVerifyEmail, status }) {
+    const {t,i18n}=useTranslation()
+
     return (
         <AuthenticatedLayout page={'System'} action={'Profile'}>
-            <Head title="Profile" />
+            <Head title={t('Profile')} />
 
             <div>
                 <div className="mx-auto space-y-6">

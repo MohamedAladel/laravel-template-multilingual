@@ -1,3 +1,4 @@
+const { dir } = require('i18next')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
@@ -33,5 +34,7 @@ module.exports = {
         prefix: '', // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
         logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
         themeRoot: ':root', // The element that receives theme color CSS variables
+        direction: 'rtl', // The direction of the text
+        rtl: true, // build the RTL version. (adds all :rtl variants also)
     },
 }

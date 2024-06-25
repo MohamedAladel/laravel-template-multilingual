@@ -14,7 +14,10 @@ import { useModalState } from '@/hooks'
 import { formatDateTime, showToast } from '@/utils'
 import JsonModal from './JsonModal'
 
+import { useTranslation } from 'react-i18next';
+
 export default function Index(props) {
+    const { t,i18n } = useTranslation();
     const {
         link,
         data: { links, data },

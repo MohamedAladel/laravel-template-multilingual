@@ -77,7 +77,7 @@ export default function FormFile({
                 {preview && preview}
                 {loading ? (
                     <div className="file-input input-bordered">
-                        <div className="flex flex-row space-x-2 items-center h-full pl-2">
+                        <div className="flex flex-row space-x-2 items-center h-full ps-2">
                             <Spinner />
                             <div>{percent} Uploading...</div>
                         </div>
@@ -90,7 +90,7 @@ export default function FormFile({
                         }`}
                     >
                         <div className="flex flex-row space-x-2 h-full">
-                            <div className="-ml-4 bg-base-200 h-full input px-4 font-bold flex flex-row items-center">
+                            <div className="-ms-4 bg-base-200 h-full input px-4 font-bold flex flex-row items-center">
                                 <div>Choose a file</div>
                             </div>
                             <div className="text-opacity-35 text-base-content flex flex-row items-center">

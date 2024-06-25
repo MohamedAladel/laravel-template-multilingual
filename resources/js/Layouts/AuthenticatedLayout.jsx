@@ -10,6 +10,7 @@ import Breadcrumb from '@/Components/DaisyUI/Breadcrumb'
 import ThemeSwitch from '@/Components/DaisyUI/ThemeSwitch'
 import { showToast } from '@/utils'
 
+import { useTranslation } from 'react-i18next';
 export default function AuthenticatedLayout({
     children,
     page = '',
@@ -31,6 +32,7 @@ export default function AuthenticatedLayout({
         themeChange(false)
         // 👆 false parameter is required for react project
     }, [])
+    const {t,i18n}=useTranslation()
 
     return (
         <div className="min-h-screen">
@@ -39,11 +41,11 @@ export default function AuthenticatedLayout({
                 show={showingNavigationDropdown}
                 setShow={setShowingNavigationDropdown}
             />
-            <main className="ml-0 transition md:ml-64">
+            <main className="ms-0 transition md:ms-64">
                 <nav className="">
                     <div className="mx-auto px-4 py-2">
                         <div className="flex justify-between sm:justify-end">
-                            <div className="-mr-2 flex items-center sm:hidden space-x-2">
+                            <div className="-me-2 flex items-center sm:hidden space-x-2">
                                 <button
                                     onClick={() =>
                                         setShowingNavigationDropdown(
@@ -56,11 +58,11 @@ export default function AuthenticatedLayout({
                                 </button>
                             </div>
 
-                            <div className="flex items-center sm:ml-6">
-                                <div className="ml-3 relative">
+                            <div className="flex items-center sm:ms-6">
+                                <div className="ms-3 relative">
                                     <ThemeSwitch />
                                 </div>
-                                <div className="ml-3 relative">
+                                <div className="ms-3 relative">
                                     <details className="dropdown dropdown-end">
                                         <summary className="btn btn-ghost btn-circle">
                                             <span className="inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-500 text-sm font-semibold text-white leading-none">
@@ -78,7 +80,7 @@ export default function AuthenticatedLayout({
                                                     href={route('profile.edit')}
                                                     as="button"
                                                 >
-                                                    Profile
+                                                    {t('Profile')}
                                                 </Link>
                                             </li>
                                             <li>
@@ -87,7 +89,7 @@ export default function AuthenticatedLayout({
                                                     method="post"
                                                     as="button"
                                                 >
-                                                    Logout
+                                                    {t('Logout')}
                                                 </Link>
                                             </li>
                                         </ul>

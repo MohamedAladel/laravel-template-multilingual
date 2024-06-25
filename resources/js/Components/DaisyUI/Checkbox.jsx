@@ -19,7 +19,7 @@ export default function Checkbox(props) {
                         checked={props.value}
                         disabled={props.disabled}
                     />
-                    <span className="label-text ml-2">{props.label}</span>
+                    <span className="label-text ms-2">{props.label}</span>
                 </label>
             </div>
             <BottomTextHelper error={props.error} />
