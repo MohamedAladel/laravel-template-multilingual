@@ -2,10 +2,6 @@
 
 This just a laravel template with breeze react, user role based access crud with setup <a href="https://daisyui.com?ref=github.com/ajikamaludin" target="_blank">daisyui style</a> admin template test
 
-## Support me
-
-<a href="https://trakteer.id/ajikamaludin" target="_blank"><img id="wse-buttons-preview" src="https://cdn.trakteer.id/images/embed/trbtn-blue-2.png" height="40" style="border:0px;height:40px;" alt="Trakteer Saya"></a>
-
 ## Requirements
 
 -   PHP 8.2 or latest
@@ -105,6 +101,7 @@ in above example you will can see the result by access [http://localhost/custome
 ### 2. language 
 
 you can change the direction from "resources\css\app.css"
+
 ```css
 // resources\css\app.css
 :root {
@@ -113,7 +110,8 @@ you can change the direction from "resources\css\app.css"
 }
 ```
 you can change the default language by changing the value of "lng" in "resources\js\i18n.js"
-you can add a new language by 
+
+you can add a new language by :
 
 1:add the translation folder in "resources\js\Translations"
 
