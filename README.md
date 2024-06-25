@@ -113,8 +113,11 @@ you can change the direction from "resources\css\app.css"
 }
 ```
 you can add a new language by 
+
 1:add the translation folder in "resources\js\Translations"
+
 2:import the translation in "resources\js\i18n.js" and 
+
 add it to i18n resources it should look something like this
 ```js
 
