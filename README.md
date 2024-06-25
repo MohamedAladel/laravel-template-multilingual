@@ -102,3 +102,47 @@ in above example you will can see the result by access [http://localhost/custome
     permission: 'view-setting-customers',
 },
 ```
+### 2. language 
+
+you can change the direction from "resources\css\app.css"
+```css
+// resources\css\app.css
+:root {
+    --padding-card: 20px;
+    direction: rtl;
+}
+```
+you can add a new language by 
+
+1:add the translation folder in "resources\js\Translations"
+
+2:import the translation in "resources\js\i18n.js" and 
+
+add it to i18n resources it should look something like this
+```js
+// resources\js\i18n.js
+import translation_en from './Translations/en/translation.json'
+import translation_ar from './Translations/ar/translation.json'//#1//import the translation
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    debug: true,
+    lng:'ar', // the default language 
+    fallbackLng: 'en',
+    interpolation: {
+      escapeValue: false, 
+      
+    },
+    resources: {
+        en: {
+            translation: translation_en,
+        },
+        ar: {
+            translation: translation_ar, //#2//add it to resources 
+        },
+    }
+  });
+
+```
