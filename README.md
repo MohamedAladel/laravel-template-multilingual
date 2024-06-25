@@ -114,11 +114,12 @@ you can change the direction from "resources\css\app.css"
 ```
 you can add a new language by 
 1:add the translation folder in "resources\js\Translations"
-2:import the translation in "resources\js\i18n.js" and
+2:import the translation in "resources\js\i18n.js" and 
+add it to i18n resources it should look something like this
 ```js
 
 import translation_en from './Translations/en/translation.json'
-import translation_ar from './Translations/ar/translation.json'//1//import the translation
+import translation_ar from './Translations/ar/translation.json'//#1//import the translation
 
 i18n
   .use(LanguageDetector)
@@ -136,7 +137,7 @@ i18n
             translation: translation_en,
         },
         ar: {
-            translation: translation_ar, //2//add it to resources 
+            translation: translation_ar, //#2//add it to resources 
         },
     }
   });
