@@ -15,6 +15,7 @@ i18n
     debug: true,
     lng:'ar',
     fallbackLng: 'en',
+    
     interpolation: {
       escapeValue: false, 
       
