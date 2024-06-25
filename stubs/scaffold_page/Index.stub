@@ -115,7 +115,7 @@ export default function Index(props) {
                                                     >
                                                         <div className="flex space-x-1 items-center">
                                                             <HiTrash />
-                                                            <div>{{t('Delete')}}</div>
+                                                            <div>{t('Delete')}</div>
                                                         </div>
                                                     </Dropdown.Item>
                                                 </HasPermission>

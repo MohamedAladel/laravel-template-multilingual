@@ -84,7 +84,7 @@ export default function Form(props) {
                                 </Button>
                                 <Link href={route('{{ models }}.index')}>
                                     <Button type="secondary">
-                                        {{t('Cancel')}}
+                                        {t('Cancel')}
                                     </Button>
                                 </Link>
                             </div>

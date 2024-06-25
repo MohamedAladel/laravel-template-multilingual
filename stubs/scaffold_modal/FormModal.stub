@@ -77,10 +77,10 @@ export default function FormModal(props) {
                         processing={processing}
                         type="primary"
                     >
-                        {{t('Save')}}
+                        {t('Save')}
                     </Button>
                     <Button onClick={handleClose} type="secondary">
-                        {{t('Cancel')}}
+                        {t('Cancel')}
                     </Button>
                 </div>
             </div>
