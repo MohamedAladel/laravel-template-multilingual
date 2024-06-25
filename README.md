@@ -112,6 +112,7 @@ you can change the direction from "resources\css\app.css"
     direction: rtl;
 }
 ```
+you can change the default language by changing the value of "lng" in "resources\js\i18n.js"
 you can add a new language by 
 
 1:add the translation folder in "resources\js\Translations"
