@@ -100,15 +100,7 @@ in above example you will can see the result by access [http://localhost/custome
 ```
 ### 2. language 
 
-you can change the direction from "resources\css\app.css"
 
-```css
-// resources\css\app.css
-:root {
-    --padding-card: 20px;
-    direction: rtl;
-}
-```
 you can change the default language by changing the value of "lng" in "resources\js\i18n.js"
 
 you can add a new language by :
@@ -120,28 +112,43 @@ you can add a new language by :
 add it to i18n resources it should look something like this
 ```js
 // resources\js\i18n.js
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import translation_en from './Translations/en/translation.json'
-import translation_ar from './Translations/ar/translation.json'//#1//import the translation
+import translation_ar from './Translations/ar/translation.json'
+import translation_id from './Translations/id/translation.json'
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: true,
-    lng:'ar', // the default language 
+    debug: false,
     fallbackLng: 'en',
+    
     interpolation: {
-      escapeValue: false, 
-      
+      escapeValue: false,
     },
     resources: {
         en: {
             translation: translation_en,
         },
         ar: {
-            translation: translation_ar, //#2//add it to resources 
+            translation: translation_ar,
         },
+        id: {
+            translation: translation_id,
+        }
+    },
+    detection: {
+      order: ['localStorage'],
+      caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLng',
+      // Persist the user's language preference
+     persistentUser: true
     }
   });
+
+export default i18n;
 
 ```
