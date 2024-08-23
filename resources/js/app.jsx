@@ -6,6 +6,8 @@ import { createRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import './i18n';
+import i18next from 'i18next'
+window.document.dir=i18next.dir();
 const appName =
     window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
 createInertiaApp({
