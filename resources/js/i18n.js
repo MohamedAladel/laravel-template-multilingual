@@ -6,19 +6,14 @@ import translation_ar from './Translations/ar/translation.json'
 import translation_id from './Translations/id/translation.json'
 
 i18n
-  // detect user language
   .use(LanguageDetector)
-  // pass the i18n instance to react-i18next.
   .use(initReactI18next)
-  // init i18next
   .init({
-    debug: true,
-    lng:'ar',
+    debug: false,
     fallbackLng: 'en',
     
     interpolation: {
-      escapeValue: false, 
-      
+      escapeValue: false,
     },
     resources: {
         en: {
@@ -30,6 +25,13 @@ i18n
         id: {
             translation: translation_id,
         }
+    },
+    detection: {
+      order: ['localStorage'],
+      caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLng',
+      // Persist the user's language preference
+     persistentUser: true
     }
   });
 
